@@ -1,0 +1,28 @@
+
+body{
+    font-family: 'Roboto';
+    font-size: 20px;
+}
+
+.container-left{
+    background-color: white;
+}
+
+.container-right{
+    background-color: grey;
+}
+.container-mid{
+    background: green;
+}
+img{
+    width: 100%;
+}
+#logoimg{
+    padding: 70px 0;
+}
+.card-body{
+    padding: 70px 0 ;
+}
+#logintitle{
+    font-weight:bolder;
+}
