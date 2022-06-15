@@ -10,72 +10,16 @@ include "database_connection.php";
 
 
 
-//Add item to cart
-if(isset($_POST['addToCart'])){
 
-    if(isset($_SESSION['cart'])){
-
-        //Returns all itemID from current session
-        $itemID_array = array_column($_SESSION['cart'],"itemID");
-
-        //Check new itemid existing or not
-        if(!in_array($_POST['itemID'],$itemID_array)){
-
-            $session_array= array(
-
-                "itemID" => $_POST['itemID'],
-                "itemName" => $_POST['itemName'],
-                "stockQuantity" => $_POST['stockQuantity'],
-                "price" => $_POST['price'],
-            );
-            $_SESSION['cart'][] =  $session_array;
-        }
-    }else{
-
-        $session_array= array(
-                "itemID" => $_POST['itemID'],
-                "itemName" => $_POST['itemName'],
-                "stockQuantity" => $_POST['stockQuantity'],
-                "price" => $_POST['price'],
-        );
-        $_SESSION['cart'][] =  $session_array;
-    }
-}
-
-////Remove item from cart
-//if(isset($_POST['removeItem'])){
-//
+if(isset($_POST['removeItem']) && isset($_SESSION['cart'])){
 //    foreach ($_SESSION['cart'] as $key => $value){
-//        if($value['itemID'] == $_POST['itemID']){
+//        if($value['itemID'] == $_POST['removeitemID']){
 //            unset($_SESSION['cart'][$key]);
 //        }
 //    }
-//}
-
-if(isset($_POST['removeItem'])){
-    foreach ($_SESSION['cart'] as $key => $value){
-
-        if($value['itemID'] == $_POST['removeitemID']){
-            unset($_SESSION['cart'][$key]);
-        }
-    }
+    var_dump($_POST['removeitemID']);
 }
 
-
-////Update item qty when input change
-//if(isset($_POST['qtyChange'])){
-//
-//    foreach ($_SESSION['cart'] as $key => $value){
-//        if($value['itemID'] == $_POST['itemID']){
-//            $_SESSION['cart'][$key]['buyqty'] =$_POST['qtyChange'];
-//            var_dump($_SESSION['cart'][$_POST['itemID']]);
-//        }
-//    }
-//}
-
-if(isset($_POST['qtyChange'])){
-    var_dump($_POST);
-}
 ?>
 <!doctype html>
 <html lang="en">
@@ -119,7 +63,7 @@ if(isset($_POST['qtyChange'])){
                                             <p class="text-uppercase mb-0 py-2">HK$<?=$price?></p>
 
                                             <!--Page anchor #form-anchor id="form-anchor"-->
-                                            <form method="post" action="<?php echo $_SERVER['PHP_SELF']?>" >
+                                            <form method="post" action="<?php echo $_SERVER['PHP_SELF']?>" id="addCarti<?=$itemID?>" >
 
                                                 <!--Hidden element-->
                                                 <input type="hidden" name="itemID" value="<?=$itemID?>">
@@ -129,9 +73,9 @@ if(isset($_POST['qtyChange'])){
                                                 <!--Hidden element-->
 
                                                 <!--Submit button-->
-                                                <input type="submit" class="btn btn-warning " name="addToCart" value="Add To Cart">
-                                                <i class="fas fa-shopping-cart"></i>
-                                                </input>
+                                                <input type="button" class="btn btn-warning " name="addToCart" value="Add To Cart" onclick="addtoCart(this)">
+<!--                                                <i class="fas fa-shopping-cart"></i>-->
+<!--                                                </input>-->
                                             </form>
                                         </div>
                                     </div>
@@ -153,7 +97,7 @@ if(isset($_POST['qtyChange'])){
                     </div>
 
                     <div class="table-responsive">
-                        <table class="table table-bordered">
+                        <table class="shopping_cart table table-bordered">
                             <tr>
                                 <th class="w-40">Name</th>
                                 <th class="w-5">Quantity</th>
@@ -167,11 +111,12 @@ if(isset($_POST['qtyChange'])){
                             if(!empty($_SESSION['cart']))
                             {
                                 $amount=0;
-                                foreach ($_SESSION['cart'] as $key => $values){
-                                    extract($values);
+//                                var_dump($_SESSION['cart']);
+                                foreach ($_SESSION['cart'] as $items){
+                                    extract($items);
                                     // $itemID $itemName $itemDescription $stockQuantity $price
                                     ?>
-                                    <tr>
+                                    <tr class="itemRow<?=$itemID?>">
                                         <!--Item Name & hidden itemID -->
                                         <td>
                                             <?=$itemName?>
@@ -181,24 +126,26 @@ if(isset($_POST['qtyChange'])){
                                         <td>
 
                                             <input type="hidden"  name="itemID" value="<?=$itemID?>">
-                                            <input type="number" class="itemqty" name="buyqty" min="1" max="<?=$stockQuantity?>" value="1" onclick="calAmount()" onchange="getValue(<?=$itemID?>,this)">
+                                            <input type="number" class="itemqty" name="buyqty" min="1" max="<?=$stockQuantity?>" value="<?=$qty?>"  onchange="updateQuantity(<?=$itemID?>,this)">
 
                                         </td>
 
                                         <!--unit price-->
-                                        <td>HK$<?=$price?>
+                                        <td>$<?=$price?>
                                             <input type="hidden" class="itemprice" value="<?=$price?>">
                                         </td>
 
                                         <!--total price =  buyqty * unit price-->
                                         <td class="itemamount">
-                                            0
+                                           $<?=$price*$qty?>
                                         </td>
 
                                         <!--REMOVE button-->
                                         <td>
-                                            <input type="hidden" name="removeitemID" value="<?=$itemID?>">
-                                            <input type="submit" name="removeItem" class="btn btn-sm btn-danger btn-block" value="REMOVE">
+                                            <form method="post" action="placeOrder.php">
+                                                <input type="hidden" name="removeitemID" value="<?=$itemID?>">
+                                                <input type="submit" name="removeItem" class="btn btn-sm btn-danger btn-block" value="REMOVE">
+                                            </form>
                                         </td>
                                     </tr>
                                     <?php
@@ -237,6 +184,7 @@ if(isset($_POST['qtyChange'])){
         </div>
     </div>
 </div>
+<script type="text/javascript" src="src/placeOrder.js"></script>
 </body>
 </html>
 
