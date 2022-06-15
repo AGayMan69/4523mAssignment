@@ -8,21 +8,44 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
     <script>
-        //Return an array which hold all the element from orderdetail
+        //Return an array which hold all the element from shopping cart
         var itemprice = document.getElementsByClassName('itemprice');
         var itemqty = document.getElementsByClassName('itemqty');
         var itemamount = document.getElementsByClassName('itemamount');
-        var totalPrice = 0;
+        var subTotal = 0;
 
         function calAmount(){
-            totalPrice=0;
+            subTotal=0;
             for (i=0;i<itemprice.length;i++){
-                itemamount[i].innerText = (itemprice[i].value)*(itemqty[i].value);
-                totalPrice+=(itemprice[i].value)*(itemqty[i].value);
+                itemamount[i].innerText = 'HK$'+(itemprice[i].value)*(itemqty[i].value);
+                subTotal+=(itemprice[i].value)*(itemqty[i].value);
             }
-            document.getElementById('cartTotal').innerText = totalPrice;
+            document.getElementById('subTotalSpan').innerText = subTotal;
         }
+
+
+        function getValue(itemid,qty){
+
+            var qtyChange = {
+                "itemid": itemid,
+                "qty": qty.value};
+            console.log(qtyChange)
+
+            // $.ajax(
+            //     {
+            //     url: 'placeOrder.php',
+            //     data: qtyChange,
+            //     type: 'post',
+            //         success:function (result){
+            //
+            //
+            //         }
+            // })
+        }
+
     </script>
 
 </head>
