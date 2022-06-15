@@ -42,25 +42,28 @@ min-height: 100vh;
                 </div>
                 <h4 class="mb-4 text-capitalize text-primary font-weight-bold ">Sign into account</h4>
                 <?php
-                if(true) {
+                if(isset($_GET['error'])) {
                     ?>
                     <div class="col-md-8 p-3 alert alert-danger alert-dismissible fade show" role="alert">
                         <i class="bi bi-exclamation-triangle-fill me-1"></i>
-                        Wrong Staff ID or Password
+                        <?php echo $_GET["error"]; ?>
                         <button class="btn-close" data-bs-dismiss="alert"></button>
                     </div>
                     <?php
                 }
                 ?>
-                <form class="flex-grow-1" action="">
+                <form class="flex-grow-1"
+                      action="login_auth.php"
+                      method="post"
+                        >
                     <div class="form-group mt-1 col-md-8">
-                        <label class="lead mb-1 fs-6 fw-semibold  ">Staff ID</label>
-                        <input type="text" placeholder="Staff ID" name="staffID"  class="form-control">
+                        <label class="lead mb-1 fs-6 fw-semibold" for="formID">Staff ID</label>
+                        <input type="text" placeholder="Staff ID" name="staffID" id="formID"  class="form-control">
 
                     </div>
                     <div class="form-group mt-3 col-md-8">
-                        <label class="lead mb-1 fs-6 fw-semibold">Password</label>
-                        <input type="password" placeholder="********" name="password"  class="form-control">
+                        <label class="lead mb-1 fs-6 fw-semibold" for="formPassword">Password</label>
+                        <input type="password" placeholder="********" name="password"  id="formPassword" class="form-control">
 
                     </div>
                     <div class="form-row col-md-8 d-grid mt-3">
