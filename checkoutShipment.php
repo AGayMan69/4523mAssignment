@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -10,97 +11,99 @@ session_start();
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-
-<!--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">-->
+    <!--Bootstrap CSS-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 </head>
 <body>
 <?php include "nav.php";?>
 
+<div class="container">
 
-<div class="container d-flex align-content-center align-items-center" style="min-height:80vh">
 
-    <div class="card col-8 offset-2">
+    <!--Breadcrumb-->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb py-2">
+            <li class="breadcrumb-item lead" ><a href="#">Cart</a></li>
+            <li class="breadcrumb-item active lead" aria-current="page">Customer Info</li>
+        </ol>
+    </nav>
 
-        <h2 class="my-5 h2">XXXXXXXXXXXXXXXXXXX</h2>
-        <p>XXXXXXXXXXXXXX</p>
+    <div class="row">
 
-        <!-- Extended material form grid -->
-        <form>
-            <!-- Grid row -->
-            <div class="form-row">
-                <!-- Grid column -->
-                <div class="col-md-6">
-                    <!-- Material input -->
-                    <div class="md-form form-group">
-                        <input type="email" class="form-control" id="inputEmail4MD" placeholder="Email">
-                        <label for="inputEmail4MD">Email</label>
+        <div class="col-md-6 offset-md-3">
+
+            <div class="signup-form">
+
+                <form action="checkoutResult.php" class="mt-5 border p-4 bg-light shadow">
+
+                    <h4 class="mb-3 text-secondary">Customer Information</h4>
+
+                    <div class="row">
+
+                        <!--Custome Name-->
+                        <div class="mb-3 col-md-6">
+                            <label><span>Customer Name</span></label>
+                            <input type="text" name="customername" class="form-control" >
+                        </div>
+
+                        <!--Phone Number-->
+                        <div class="mb-3 col-md-6">
+                            <label><span>Phone Number</span></label>
+                            <input type="tel" name="phonenumber" class="form-control">
+                        </div>
+
+                        <!--Email address-->
+                        <div class="mb-3 col-md-6">
+                            <label><span>Email</span></label>
+                            <input type="email" name="emailaddress" class="form-control" placeholder="someone@gmail.com">
+                        </div>
+
+                        <div class="row">
+                            <h4 class="text-secondary py-2">Delivery Detail</h4>
+
+                        <!--Customer address-->
+                        <div class="mb-3 col-md-12">
+                            <label><span>Customer Address</span></label>
+                            <input type="text" name="customeraddress" class="form-control">
+                        </div>
+
+                        <!--Delivery Date-->
+                        <div class="mb-3 col-md-6">
+                            <label><span>Delivery Date</span></label>
+                            <input type="date" name="deliverydate"  class="form-control">
+                        </div>
+
+                            <!--Submit & Reset button-->
+                            <div class="d-flex flex-row justify-content-end p-2">
+                                <input type="reset" class="btn btn-outline-danger mx-3">
+                                <input type="submit" name="checkout" class="btn btn-info" value="Proceed to Payment">
+                            </div>
+
+                        </div>
                     </div>
-                </div>
-                <!-- Grid column -->
+                </form>
 
-                <!-- Grid column -->
-                <div class="col-md-6">
-                    <!-- Material input -->
-                    <div class="md-form form-group">
-                        <input type="password" class="form-control" id="inputPassword4MD" placeholder="Password">
-                        <label for="inputPassword4MD">Password</label>
+                <!--Progress Bar-->
+                <div class="progress">
+
+                    <!-- 0%  <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>-->
+                    <div class="progress-bar" role="progressbar" style="width: 50%; height: 2px"  aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" >
+
                     </div>
-                </div>
-                <!-- Grid column -->
             </div>
-            <!-- Grid row -->
-
-            <!-- Grid row -->
-            <div class="row">
-                <!-- Grid column -->
-                <div class="col-md-12">
-                    <!-- Material input -->
-                    <div class="md-form form-group">
-                        <input type="text" class="form-control" id="inputAddressMD" placeholder="1234 Main St">
-                        <label for="inputAddressMD">Address</label>
-                    </div>
-                </div>
-                <!-- Grid column -->
-
-                <!-- Grid column -->
-                <div class="col-md-12">
-                    <!-- Material input -->
-                    <div class="md-form form-group">
-                        <input type="text" class="form-control" id="inputAddress2MD" placeholder="Apartment, studio, or floor">
-                        <label for="inputAddress2MD">Address 2</label>
-                    </div>
-                </div>
-                <!-- Grid column -->
-            </div>
-            <!-- Grid row -->
-
-            <!-- Grid row -->
-            <div class="form-row">
-                <!-- Grid column -->
-                <div class="col-md-6">
-                    <!-- Material input -->
-                    <div class="md-form form-group">
-                        <input type="text" class="form-control" id="inputCityMD" placeholder="New York City">
-                        <label for="inputCityMD">City</label>
-                    </div>
-                </div>
-                <!-- Grid column -->
-
-                <!-- Grid column -->
-                <div class="col-md-6">
-                    <!-- Material input -->
-                    <div class="md-form form-group">
-                        <input type="text" class="form-control" id="inputZipMD" placeholder="11206-1117">
-                        <label for="inputZipMD">Zip</label>
-                    </div>
-                </div>
-                <!-- Grid column -->
-            </div>
-            <!-- Grid row -->
-            <button type="submit" class="btn btn-primary btn-md">Sign in</button>
-        </form>
-        <!-- Extended material form grid -->
+        </div>
     </div>
 </div>
+
+<!--<div class="container d-flex align-content-center align-items-center" style="min-height:80vh">-->
+<!---->
+<!--    -->
+<!---->
+<!---->
+<!--</div>-->
+
+
+<!--Bootstrap JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 </body>
 </html>

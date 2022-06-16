@@ -159,8 +159,6 @@ include "nav.php"?>
                         </table>
 
 
-
-
                         <!-- Display total price-->
                         <div class="order">
                             <div class="d-flex flex-row justify-content-between p-3 mx-3">
