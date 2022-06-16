@@ -8,18 +8,15 @@ session_start();
 
 include "database_connection.php";
 
-
-
-
 if(isset($_POST['removeItem']) && isset($_SESSION['cart'])){
-//    foreach ($_SESSION['cart'] as $key => $value){
-//        if($value['itemID'] == $_POST['removeitemID']){
-//            unset($_SESSION['cart'][$key]);
-//        }
-//    }
+    foreach ($_SESSION['cart'] as $key => $value){
+        if($value['itemID'] == $_POST['removeitemID']){
+            unset($_SESSION['cart'][$key]);
+            unset($_POST['removeItem']);
+        }
+    }
     var_dump($_POST['removeitemID']);
 }
-
 ?>
 <!doctype html>
 <html lang="en">
@@ -33,6 +30,21 @@ if(isset($_POST['removeItem']) && isset($_SESSION['cart'])){
 <body>
 <?php include "nav.php";?>
 <div class="container" xmlns="http://www.w3.org/1999/html">
+
+
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page"><a href="#">Cart</a></li>
+        </ol>
+    </nav>
+
+    <div class="progress">
+        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+
+
+
     <div class="col-md-12">
         <div class="row text-center">
             <div class="col-md-6">
@@ -126,7 +138,8 @@ if(isset($_POST['removeItem']) && isset($_SESSION['cart'])){
                                         <td>
 
                                             <input type="hidden"  name="itemID" value="<?=$itemID?>">
-                                            <input type="number" class="itemqty" name="buyqty" min="1" max="<?=$stockQuantity?>" value="<?=$qty?>"  onchange="updateQuantity(<?=$itemID?>,this)">
+                                        <!--style="width:80%;"-->
+                                            <input type="number" class="itemqty" name="buyqty" min="1" max="<?=$stockQuantity?>" value="<?=$qty?>"   onchange="updateQuantity(<?=$itemID?>,this)">
 
                                         </td>
 
