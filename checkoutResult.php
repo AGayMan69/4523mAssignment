@@ -9,7 +9,7 @@ session_start();
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Shopping Cart</title>
     <!--Bootstrap CSS-->
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
@@ -29,6 +29,7 @@ session_start();
             <li class="breadcrumb-item active lead" aria-current="page">Customer Info</li>
         </ol>
     </nav>
+    <!--Breadcrumb-->
 
     <div class="row">
 
@@ -36,33 +37,24 @@ session_start();
 
             <div class="card p-4">
 
-                <div class="card-body">
+                <div class="card-body mb-3">
 
                     <h5 class="card-title text-left">Order ID #1</h5>
                     <p class="card-text text-center" ><i class="bi bi-check-circle-fill" style="font-size:5em;"></i>.</p>
-<!--                    **-->
                     <h2 class="card-text text-center">Transaction successful</h2>
 
                 </div>
 
+                <!--Progress Bar-->
 
-<!--                -->
-<!--                <div class="d-flex flex-row justify-content-center">-->
-<!--                    <span>Subtotal</span>-->
-<!--                    <span  id="subTotalSpan">XXX</span>-->
-<!--                </div>-->
-<!---->
-<!--                <div class="d-flex flex-row justify-content-center">-->
-<!--                    <div class="px-2">-->
-<!--                    <span>Subtotal</span>-->
-<!--                    <span  id="subTotalSpan">XXX</span>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!---->
-<!--                <div class="d-flex flex-row justify-content-center">-->
-<!--                    <span>Subtotal</span>-->
-<!--                    <span  id="subTotalSpan">XXX</span>-->
-<!--                </div>-->
+                    <div class="position-relative mt-5 mx-4 mb-5">
+                        <div class="progress" style="height: 5px;">
+                            <div class="progress-bar bg-primary" role="progressbar" style="width: 100%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <button type="button" class="position-absolute top-0 start-0 translate-middle btn btn-sm btn-primary rounded-pill" style="width: 2rem; height:2rem;">1</button>
+                        <button type="button" class="position-absolute top-0 start-50 translate-middle btn btn-sm btn-primary rounded-pill" style="width: 2rem; height:2rem;">2</button>
+                        <button type="button" class="position-absolute top-0 start-100 translate-middle btn btn-sm btn-primary rounded-pill" style="width: 2rem; height:2rem;">3</button>
+                    </div>
 
                 <table class="table table-hover">
                     <thead>
@@ -76,6 +68,8 @@ session_start();
 
                     <tbody>
 
+                    <!--column insert here-->
+
 <!--                    <tr>-->
 <!--                        <th scope="row">1</th>-->
 <!--                        <td>NOVEL NF4091 9”All-way Strong Wind Circulation Fan</td>-->
@@ -89,9 +83,6 @@ session_start();
 <!--                        <td>Otto</td>-->
 <!--                        <td>@mdo</td>-->
 <!--                    </tr>-->
-
-
-
                     </tbody>
                 </table>
 
@@ -135,13 +126,19 @@ session_start();
                 <!-- Display total price-->
 
                 <form action="" method="post">
-                    <div class="d-grid gap-2 col-6 mx-auto">
-                            <button type="submit" name="back" class="btn btn-primary" >BACK</button>
+                    <div class="d-grid gap-2 col-4 mx-auto">
+                            <button type="submit" name="back" class="btn btn-outline-dark" >BACK</button>
                     </div>
                 </form>
 
+
+<!--                <div class="progress position-absolute bottom-0 start-0 w-100 " style="height:10px">-->
+<!---->
+<!--                    <div class="progress-bar w-100" role="progressbar"  aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" ></div>-->
+<!--                </div>-->
+
+
             </div>
-        </div>
     </div>
 </div>
 

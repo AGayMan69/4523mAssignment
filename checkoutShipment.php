@@ -10,7 +10,7 @@ session_start();
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Shopping Cart</title>
     <!--Bootstrap CSS-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 </head>
@@ -83,24 +83,20 @@ session_start();
                     </div>
                 </form>
 
+
                 <!--Progress Bar-->
-                <div class="progress">
-
-                    <!-- 0%  <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>-->
-                    <div class="progress-bar" role="progressbar" style="width: 50%; height: 2px"  aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" >
-
+                <div class="position-relative col-3 mt-5 mx-4 mb-5 position-absolute bottom-0" style="left:50%; bottom:90em; transform: translateX(-55%);">
+                    <div class="progress" style="height: 5px;">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
+                    <button type="button" class="position-absolute top-0 start-0 translate-middle btn btn-sm btn-primary rounded-pill" style="width: 2rem; height:2rem;">1</button>
+                    <button type="button" class="position-absolute top-0 start-50 translate-middle btn btn-sm btn-primary rounded-pill" style="width: 2rem; height:2rem;">2</button>
+                    <button type="button" class="position-absolute top-0 start-100 translate-middle btn btn-sm btn-secondary rounded-pill" style="width: 2rem; height:2rem;">3</button>
+                </div>
             </div>
         </div>
     </div>
 </div>
-
-<!--<div class="container d-flex align-content-center align-items-center" style="min-height:80vh">-->
-<!---->
-<!--    -->
-<!---->
-<!---->
-<!--</div>-->
 
 
 <!--Bootstrap JS-->
