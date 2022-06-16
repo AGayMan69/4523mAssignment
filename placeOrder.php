@@ -5,6 +5,13 @@
 //Delivery checkbox
 
 session_start();
+if (!isset($_SESSION['User']) ) {
+    header("Location: index.php");
+//    echo "Heading to index";
+}else if ($_SESSION['User']['Position'] != "Staff") {
+    header("Location: salesReport.php");
+//    echo "Heading salesReport";
+}
 
 include "database_connection.php";
 
@@ -20,7 +27,8 @@ include "database_connection.php";
     <title>Document</title>
 </head>
 <body>
-<?php include "nav.php";?>
+<?php
+include "nav.php"?>
 <div class="container" xmlns="http://www.w3.org/1999/html">
 
 

@@ -5,9 +5,9 @@ if (isset($_POST['staffID']) && isset($_POST['password'])) {
     extract($_POST);
 
     if (empty($staffID)) {
-        header("Location: login.php?error=Staff ID is required");
+        header("Location: index.php?error=Staff ID is required");
     } else if (empty($password)) {
-        header("Location: login.php?error=Password is required");
+        header("Location: index.php?error=Password is required");
     } else {
         $conn = getDBconnection();
         $sql = "SELECT * FROM staff WHERE staffID = '$staffID'";
@@ -21,14 +21,20 @@ if (isset($_POST['staffID']) && isset($_POST['password'])) {
             if (strcmp($password, $user_password) == 0) {
                 echo "Login successfully";
                 // Creating Session
-                $_SESSION['ID'] = $user_staffID;
-                $_SESSION['Name'] = $user_staffName;
-                $_SESSION['position'] = $user_position;
+                session_start();
+                $_SESSION['User']['ID'] = $user_staffID;
+                $_SESSION['User']['Name'] = $user_staffName;
+                $_SESSION['User']['Position'] = $user_position;
+                if ($_SESSION['User']['Position'] == "Staff") {
+                    header("Location: placeOrder.php");
+                } else {
+                    header("Location: salesReport.php");
+                }
             } else {
-                header("Location: login.php?error=Wrong Staff ID or Password");
+                header("Location: index.php?error=Wrong Staff ID or Password");
             }
         } else {
-            header("Location: login.php?error=Wrong Staff ID or Password");
+            header("Location: index.php?error=Wrong Staff ID or Password");
         }
     }
 }

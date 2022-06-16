@@ -1,3 +1,13 @@
+<?php
+    session_start();
+    if (isset($_SESSION['User'])){
+        if ($_SESSION['User']['Position'] == "Staff") {
+           header("Location: placeOrder.php");
+        } else {
+            header("Location: salesReport.php");
+        }
+    }
+?>
 <!doctype html>
 <html lang="en">
 <head>

@@ -1,6 +1,5 @@
 <?php
-
-$page = "Staff";
+$page = $_SESSION['User']['Position'];
 if ($page === "Staff") {
    $urls = array(
        "View Order" => 'viewOrder.php',
@@ -54,8 +53,18 @@ EOD;
 
                         }
                     ?>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" id="navbarUserDropDown" role="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-person-fill"></i>
+                            Welcome, <?php echo "{$_SESSION['User']['Name']}"?>&nbsp;&nbsp;
+                        </a>
+                        <ul class="dropdown-menu" style="min-width: inherit; width: 100%">
+                            <li><a class="dropdown-item fw-semibold text-danger" href="logout.php">Logout</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
+
         </div>
     </nav>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
