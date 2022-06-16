@@ -23,6 +23,7 @@ $page = "Sales";
 include "nav.php";
 echo "view Order"
 ?>
+<div class="container"></div>
 </body>
 </html>
 <?php
