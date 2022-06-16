@@ -23,7 +23,7 @@ session_start();
     <!--Breadcrumb-->
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb py-2">
-            <li class="breadcrumb-item lead" ><a href="#">Cart</a></li>
+            <li class="breadcrumb-item lead" ><a href="#" style="text-decoration: none">Cart</a></li>
             <li class="breadcrumb-item active lead" aria-current="page">Customer Info</li>
         </ol>
     </nav>
@@ -76,13 +76,12 @@ session_start();
                             <!--Submit & Reset button-->
                             <div class="d-flex flex-row justify-content-end p-2">
                                 <input type="reset" class="btn btn-outline-danger mx-3">
-                                <input type="submit" name="checkout" class="btn btn-info" value="Proceed to Payment">
+                                <input type="submit" name="checkoutDelivery" class="btn btn-info" value="Proceed to Payment">
                             </div>
 
                         </div>
                     </div>
                 </form>
-
 
                 <!--Progress Bar-->
                 <div class="position-relative col-3 mt-5 mx-4 mb-5 position-absolute bottom-0" style="left:50%; bottom:90em; transform: translateX(-55%);">
@@ -93,6 +92,7 @@ session_start();
                     <button type="button" class="position-absolute top-0 start-50 translate-middle btn btn-sm btn-primary rounded-pill" style="width: 2rem; height:2rem;">2</button>
                     <button type="button" class="position-absolute top-0 start-100 translate-middle btn btn-sm btn-secondary rounded-pill" style="width: 2rem; height:2rem;">3</button>
                 </div>
+
             </div>
         </div>
     </div>

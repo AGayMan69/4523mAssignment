@@ -33,17 +33,19 @@ include "nav.php"?>
 
 
 
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item active" aria-current="page"><a href="#">Cart</a></li>
-        </ol>
-    </nav>
+    <!--Breadcrumb-->
+<!--    <nav aria-label="breadcrumb">-->
+<!--        <ol class="breadcrumb py-2">-->
+<!--            <li class="breadcrumb-item active lead" aria-current="page">Cart</li>-->
+<!--        </ol>-->
+<!--    </nav>-->
+    <!--Breadcrumb-->
+
+
 
     <div class="progress">
         <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
     </div>
-
-
 
     <div class="col-md-12">
         <div class="row text-center">
@@ -118,7 +120,6 @@ include "nav.php"?>
                                 <th class="w-5">&nbsp</th>
                             </tr>
 
-
                             <?php
                             if(!empty($_SESSION['cart']))
                             {
@@ -158,7 +159,6 @@ include "nav.php"?>
                             } ?>
                         </table>
 
-
                         <!-- Display total price-->
                         <div class="order">
                             <div class="d-flex flex-row justify-content-between p-3 mx-3">
@@ -175,14 +175,34 @@ include "nav.php"?>
                                 <span>Total</span>
                                 <span>0</span>
                             </div>
+
+
                             <div class="d-flex flex-row justify-content-end p-5">
-                                <button class="btn btn-primary mx-2">Enter Shipment Details</button>
-                                <input type="submit" name="checkout" class="btn btn-primary" value="Proceed to Payment">
+                            <!--    <button class="btn btn-primary mx-2">Enter Shipment Details</button>-->
+                                <form action="showCheckoutPage.php" method="post">
+                                    <input type="submit" name="checkoutShipment"class="btn btn-primary mx-2" value="Enter Shipment Details">
+                                    <input type="submit" name="checkoutCustomer" class="btn btn-primary" value="Proceed to Payment">
+                                </form>
                             </div>
+
                         </div>
                     </div>
                     <!-- Display total price-->
+
+
                 </div>
+
+                <!--Progress Bar-->
+                <div class="position-relative mt-5 mx-4 mb-5">
+                    <div class="progress" style="height: 5px;">
+                        <div class="progress-bar bg-secondary" role="progressbar" style="width: 100%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <button type="button" class="position-absolute top-0 start-0 translate-middle btn btn-sm btn-secondary rounded-pill" style="width: 2rem; height:2rem;">1</button>
+                    <button type="button" class="position-absolute top-0 start-50 translate-middle btn btn-sm btn-secondary rounded-pill" style="width: 2rem; height:2rem;">2</button>
+                    <button type="button" class="position-absolute top-0 start-100 translate-middle btn btn-sm btn-secondary rounded-pill" style="width: 2rem; height:2rem;">3</button>
+                </div>
+                <!--Progress Bar-->
+
             </div>
         </div>
     </div>

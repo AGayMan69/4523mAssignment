@@ -20,7 +20,7 @@ session_start();
     <!--Breadcrumb-->
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb py-2">
-            <li class="breadcrumb-item lead" ><a href="#">Cart</a></li>
+            <li class="breadcrumb-item lead" ><a href="#" style="text-decoration: none">Cart</a></li>
             <li class="breadcrumb-item active lead" aria-current="page">Customer Info</li>
         </ol>
     </nav>
@@ -60,7 +60,7 @@ session_start();
                             <!--Submit & Reset button-->
                             <div class="d-flex flex-row justify-content-end p-2">
                                 <input type="reset" class="btn btn-outline-danger mx-3">
-                                <input type="submit" name="checkout" class="btn btn-info" value="Proceed to Payment">
+                                <input type="submit" name="checkoutCustomer" class="btn btn-info" value="Proceed to Payment">
                             </div>
 
                         </div>
