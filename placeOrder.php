@@ -8,15 +8,7 @@ session_start();
 
 include "database_connection.php";
 
-if(isset($_POST['removeItem']) && isset($_SESSION['cart'])){
-    foreach ($_SESSION['cart'] as $key => $value){
-        if($value['itemID'] == $_POST['removeitemID']){
-            unset($_SESSION['cart'][$key]);
-            unset($_POST['removeItem']);
-        }
-    }
-    var_dump($_POST['removeitemID']);
-}
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -155,8 +147,8 @@ if(isset($_POST['removeItem']) && isset($_SESSION['cart'])){
 
                                         <!--REMOVE button-->
                                         <td>
-                                            <form method="post" action="placeOrder.php">
-                                                <input type="hidden" name="removeitemID" value="<?=$itemID?>">
+                                            <form method="post" action="deleteCart.php">
+                                                <input type="hidden" name="removeItemID" value="<?=$itemID?>">
                                                 <input type="submit" name="removeItem" class="btn btn-sm btn-danger btn-block" value="REMOVE">
                                             </form>
                                         </td>

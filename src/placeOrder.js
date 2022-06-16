@@ -57,9 +57,9 @@ async function addtoCart(addBtn) {
     </td>
 
     <td>
-        <form method="post" action="placeOrder.php">                                            
-            <input type="hidden" name="removeitemID" value="${data['itemID']}">
-            <input type="submit" name="removeItem" class="btn btn-sm btn-danger btn-block" value="REMOVE">
+        <form method="post" action="deleteCart.php">                                            
+            <input type="hidden" name="removeItemID" value="${data['itemID']}">
+            <input type="submit" class="btn btn-sm btn-danger btn-block" value="REMOVE">
         </form>                                        
     </td>
 `;
