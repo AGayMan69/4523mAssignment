@@ -121,31 +121,23 @@ include "database_connection.php";
                                     // $itemID $itemName $itemDescription $stockQuantity $price
                                     ?>
                                     <tr class="itemRow<?=$itemID?>">
-                                        <!--Item Name & hidden itemID -->
                                         <td>
                                             <?=$itemName?>
                                         </td>
 
-                                        <!--customer buy qty-->
                                         <td>
-
                                             <input type="hidden"  name="itemID" value="<?=$itemID?>">
-                                        <!--style="width:80%;"-->
                                             <input type="number" class="itemqty" name="buyqty" min="1" max="<?=$stockQuantity?>" value="<?=$qty?>"   onchange="updateQuantity(<?=$itemID?>,this)">
-
                                         </td>
 
-                                        <!--unit price-->
                                         <td>$<?=$price?>
                                             <input type="hidden" class="itemprice" value="<?=$price?>">
                                         </td>
 
-                                        <!--total price =  buyqty * unit price-->
                                         <td class="itemamount">
                                            $<?=$price*$qty?>
                                         </td>
 
-                                        <!--REMOVE button-->
                                         <td>
                                             <form method="post" action="deleteCart.php">
                                                 <input type="hidden" name="removeItemID" value="<?=$itemID?>">

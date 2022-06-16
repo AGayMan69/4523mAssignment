@@ -17,4 +17,4 @@ if (isset($_POST['removeItemID']) && isset($_SESSION['cart'])){
 //    }
 //    var_dump($_POST['removeitemID']);
 //}
-//header("location:placeOrder.php");
+header("location:placeOrder.php");

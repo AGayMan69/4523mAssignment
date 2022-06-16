@@ -12,7 +12,7 @@ async function updateQuantity(id, input) {
     })
 
     const output = await res.json();
-    console.log(output);
+    // console.log(output);
 }
 
 async function addtoCart(addBtn) {
@@ -31,7 +31,6 @@ async function addtoCart(addBtn) {
     })
 
     const output = await res.json();
-    console.log(output);
     // checking cartRow exist
     var cartRow = `itemRow${data['itemID']}`;
     var cartRowClass = `tr.${cartRow}`;
@@ -40,8 +39,10 @@ async function addtoCart(addBtn) {
         var shoppingCartRow = document.createElement('tr');
         shoppingCartRow.classList.add(cartRow);
         const htmlString = `
-    </td class="itemRow${data['itemID']}">
+    <td>
         ${data['itemName']} 
+    </td>
+    
     <td>
         <input type="hidden" name="itemID" value="${data['itemID']}">
             <input type="number" class="itemqty" name="qty" min="1" max="${data['stockQuantity']}" value="${data['qty']}"
@@ -57,14 +58,15 @@ async function addtoCart(addBtn) {
     </td>
 
     <td>
-        <form method="post" action="deleteCart.php">                                            
-            <input type="hidden" name="removeItemID" value="${data['itemID']}">
+    <form method="post" action="deleteCart.php">
+        <input type="hidden" name="removeItemID" value="${data['itemID']}">
             <input type="submit" class="btn btn-sm btn-danger btn-block" value="REMOVE">
-        </form>                                        
+    </form>
     </td>
 `;
         shoppingCartRow.innerHTML = htmlString.trim();
         var cart = document.querySelector('.shopping_cart>tbody');
+        console.log(shoppingCartRow);
         cart.appendChild(shoppingCartRow);
     }
 }
