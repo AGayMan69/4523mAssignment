@@ -34,7 +34,7 @@ session_start();
 
             <div class="signup-form">
 
-                <form action="checkoutResult.php" class="mt-5 border p-4 bg-light shadow">
+                <form action="checkoutResult.php" method="post" class="mt-5 border p-4 bg-light shadow">
 
                     <h4 class="mb-3 text-secondary">Customer Information</h4>
 
@@ -76,7 +76,7 @@ session_start();
                             <!--Submit & Reset button-->
                             <div class="d-flex flex-row justify-content-end p-2">
                                 <input type="reset" class="btn btn-outline-danger mx-3">
-                                <input type="submit" name="checkoutDelivery" class="btn btn-info" value="Proceed to Payment">
+                                <input type="submit" name="checkoutForResult" class="btn btn-info" value="Proceed to Payment">
                             </div>
 
                         </div>
