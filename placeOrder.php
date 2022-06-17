@@ -111,7 +111,7 @@ include "nav.php"?>
 
                 <div class="card py-3">
                     <div class="d-flex flex-row justify-content-start p-4">
-                        <span><h1>Shopping Cart</h1></span>
+                        <h1>Shopping Cart</h1>
                     </div>
 
                     <div class="table-responsive">
