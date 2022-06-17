@@ -25,6 +25,9 @@ include "database_connection.php";
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
 </head>
 <body>
 <?php
@@ -181,7 +184,7 @@ include "nav.php"?>
                             <div class="d-flex flex-row justify-content-end p-5">
                             <!--    <button class="btn btn-primary mx-2">Enter Shipment Details</button>-->
                                 <form action="showCheckoutPage.php" method="post">
-                                    <input type="submit" name="checkoutShipment"class="btn btn-primary mx-2" value="Enter Shipment Details">
+                                    <input type="submit" name="checkoutShipment" class="btn btn-primary mx-2" value="Enter Shipment Details">
                                     <input type="submit" name="checkoutCustomer" class="btn btn-primary" value="Proceed to Payment">
                                 </form>
                             </div>
@@ -206,6 +209,10 @@ include "nav.php"?>
         </div>
     </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <script type="text/javascript" src="src/placeOrder.js"></script>
 </body>
 </html>
