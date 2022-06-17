@@ -88,8 +88,9 @@ include "nav.php"?>
 
                                                 <!--Submit button-->
                                                 <input type="button" class="btn btn-warning " name="addToCart" value="Add To Cart" onclick="addtoCart(this)">
-<!--                                                <i class="fas fa-shopping-cart"></i>-->
-<!--                                                </input>-->
+                                                <!--<i class="fas fa-shopping-cart"></i>-->
+                                                <!--</input>-->
+
                                             </form>
                                         </div>
                                     </div>
@@ -188,8 +189,6 @@ include "nav.php"?>
                         </div>
                     </div>
                     <!-- Display total price-->
-
-
                 </div>
 
                 <!--Progress Bar-->

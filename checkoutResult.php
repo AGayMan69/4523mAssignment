@@ -2,6 +2,8 @@
 session_start();
 include 'database_connection.php';
 
+
+
 //Empid & Discount is hard coding *******
 //unset Session['cart'] in line 263 *******
 
@@ -10,10 +12,14 @@ include 'database_connection.php';
 
 //Retrieve new order id
 function GetNewOrderID($conn){
-    $query = "SELECT max(orderID)+1 AS nextid FROM orders";
+
+    //$query = "SELECT IFNULL(max(orderID), 0)+1  AS nextid FROM orders";
+    $query ="SELECT IFNULL(MAX(CAST(orderID AS int)), 0)+1 AS nextid FROM orders";
+
     $rs = mysqli_query($conn, $query) or die(mysqli_connect_error());
     while ($rc=mysqli_fetch_assoc($rs)){
         extract($rc);
+        mysqli_free_result($rs);
         return $nextid;
     }
     return null;
@@ -28,6 +34,7 @@ if(isset($_POST['checkoutForResult'])){
         $newOrderId = GetNewOrderID($conn);
         $orderCreateDate = date("Y/m/d");
         $discount = 0.85;
+        $current_user = $_SESSION['User']['ID'];
 
         //customername,phonenumber,emailaddress,customeraddress,deliverydat,checkoutForResult
         extract($_POST);
@@ -73,7 +80,6 @@ if(isset($_POST['checkoutForResult'])){
                     <p class="card-text text-center" ><i class="bi bi-check-circle-fill" style="font-size:5em;"></i>.</p>
                     <h2 class="card-text text-center">Transaction successful</h2>
                     <p class="card-text text-center"><small class="text-muted">Order Date: <?=$orderCreateDate?></small></p>
-
                 </div>
 
                 <!--Progress Bar-->
@@ -215,8 +221,7 @@ if(isset($_POST['checkoutForResult'])){
                 //INSERT NEW ORDER TO DB
 
                 //Retrieve Customer information
-//                extract($_POST);
-
+                //extract($_POST);
                 //Check customer exist
                 $sql = "SELECT * FROM customer WHERE customerEmail ='$emailaddress'";
                 mysqli_query($conn, $sql) or die (mysqli_error($conn));
@@ -242,9 +247,9 @@ if(isset($_POST['checkoutForResult'])){
                 $sql = "INSERT INTO orders VALUES ";
                 $new_Price = $orderAmount*$discount;
                 if (isset($_POST['deliverydate'])){
-                    $sql.= "('$newOrderId','$emailaddress','s0001',NOW(),'$customeraddress','$deliverydate','$new_Price')";
+                    $sql.= "('$newOrderId','$emailaddress','$current_user',NOW(),'$customeraddress','$deliverydate','$new_Price')";
                 }else{
-                    $sql.= "('$newOrderId','$emailaddress','s0001',NOW(),NULL,NULL,'$new_Price')";
+                    $sql.= "('$newOrderId','$emailaddress','$current_user',NOW(),NULL,NULL,'$new_Price')";
                 }
                 mysqli_query($conn, $sql) or die (mysqli_error($conn));
                 $result = mysqli_affected_rows($conn);
@@ -273,6 +278,9 @@ if(isset($_POST['checkoutForResult'])){
                 }
 
                 unset($_SESSION['cart']);
+
+                mysqli_close($conn);
+
             }
         }
                 ?>
@@ -289,6 +297,7 @@ if(isset($_POST['checkoutForResult'])){
 <!--                    <div class="progress-bar w-100" role="progressbar"  aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" ></div>-->
 <!--                </div>-->
             </div>
+        </div>
     </div>
 </div>
 
