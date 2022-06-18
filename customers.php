@@ -43,7 +43,7 @@ include "nav.php";
                     <span class="input-group-text" style="background-color: transparent; border: none">
                         <i class="bi-search"></i>
                     </span>
-                <input class="col-11 form-control rounded-pill" placeholder="Search by Customer Email..." type="text"
+                <input id="search" class="col-11 form-control rounded-pill" placeholder="Search by Customer Email..." type="text"
                        style="border: none;background-color: hsl(189, 15%, 90%)">
             </div>
         </div>
@@ -55,17 +55,11 @@ include "nav.php";
                         <i class="fs-3 bi bi-sort-alpha-down align-middle"></i>
                         Sort By
                     </a>
-                    <ul class="dropdown-menu fs-5" style="min-width: inherit;">
-                        <li>
-                            <a class="dropdown-item fw-semibold text-black-50" href="#">Email</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item fw-semibold text-black-50" href="#">Name</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item fw-semibold text-black-50" href="#">Phone Number</a>
-                        </li>
-                    </ul>
+                    <div class="dropdown-menu fs-5" style="min-width: inherit;">
+                        <button onclick="changeSort('customerEmail')" type="button" class="dropdown-item fw-semibold text-black-50" href="#">Email</button>
+                        <button onclick="changeSort('customerName')" type="button" class="dropdown-item fw-semibold text-black-50" href="#">Name</button>
+                        <button onclick="changeSort('phoneNumber')" type="button" class="dropdown-item fw-semibold text-black-50" href="#">Phone Number</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -82,7 +76,7 @@ include "nav.php";
             <th scope="col" class="col-auto"></th>
         </tr>
         </thead>
-        <tbody class="bg-light " style="font-size: 1.3rem">
+        <tbody id="customerListTable" class="bg-light " style="font-size: 1.3rem">
         <tr class="align-middle mt-5 "
             style="box-shadow:  0 8px 15px -6px rgba(8,72,98,0.38)
 ">
@@ -110,40 +104,39 @@ include "nav.php";
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 
 <script>
-    const modal = $('#orderModal')
-    $(modal).on("show.bs.modal", event => {
-        const button = event.relatedTarget
-        const orderID = $(button).attr('data-bs-itemid')
+    var sort = "customerEmail";
+    var searchBar = $('#search')
 
-        // calling ajax
-        console.log($(modal))
-        console.log($(modal).find('.modal-title').text(`Item#${orderID}`))
-        $(modal).find('fieldset').attr('disabled', 'disabled')
-    })
-
-    function toggleSave(reset) {
-        if (reset === true) {
-            $('.edit-btn').removeClass('d-none')
-            $('.close-btn').removeClass('d-none')
-            $('.save-btn').addClass('d-none')
-            $('.cancel-btn').addClass('d-none')
-        } else {
-            $('.edit-btn').toggleClass('d-none')
-            $('.close-btn').toggleClass('d-none')
-            $('.save-btn').toggleClass('d-none')
-            $('.cancel-btn').toggleClass('d-none')
-            $(modal).find('fieldset').attr('disabled', function (i, v){return !v;})
-        }
+    function changeSort(order) {
+        sort = order;
+        getCustomerList()
     }
 
-    const UpdateForm = $('#updateItemForm')
-    $(UpdateForm).submit(function (e) {
-        console.log(UpdateForm[0].checkValidity())
-        if(!UpdateForm[0].checkValidity()) {
-            e.preventDefault();
-            e.stopPropagation();
+    getCustomerList()
+    function getCustomerList(){
+        // console.log(searchBar.val())
+        const postData = {
+            target: searchBar.val(),
+            order: sort
         }
-        UpdateForm.addClass('was-validated')
+        console.log(postData);
+        $.ajax({
+            data: postData,
+            type: "POST",
+            url: "getCustomerList.php",
+            success: function (response) {
+                const res = jQuery.parseJSON(response)
+                if (res.status == 200) {
+                    $('#customerListTable').html(res.message);
+                }
+            }
+        })
+    }
+
+    $(searchBar).on('keypress', function (e) {
+        if (e.which == 13) {
+            getCustomerList();
+        }
     })
 
 </script>

@@ -44,7 +44,7 @@ include "nav.php";
                     <span class="input-group-text" style="background-color: transparent; border: none">
                         <i class="bi-search"></i>
                     </span>
-                    <input class="col-11 form-control rounded-pill" placeholder="Search by customer email..." type="text"
+                    <input id="search" class="col-11 form-control rounded-pill" placeholder="Search by customer email..." type="text"
                                                                                                                              style="border: none;background-color: hsl(189, 15%, 90%)">
                 </div>
         </div>
@@ -57,20 +57,12 @@ include "nav.php";
                         <i class="fs-3 bi bi-sort-alpha-down align-middle"></i>
                         Sort By
                     </a>
-                    <ul class="dropdown-menu fs-5" style="min-width: inherit;">
-                        <li>
-                            <a class="dropdown-item fw-semibold text-black-50" href="#">Order ID</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item fw-semibold text-black-50" href="#">Email</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item fw-semibold text-black-50" href="#">Creation Time</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item fw-semibold text-black-50" href="#">Amount</a>
-                        </li>
-                    </ul>
+                    <div class="dropdown-menu fs-5" style="min-width: inherit;">
+                            <button onclick="changeSort('orderID')" type="button" class="dropdown-item fw-semibold text-black-50" href="#">Order ID</button>
+                            <button onclick="changeSort('customerEmail')" type="button" class="dropdown-item fw-semibold text-black-50" href="#">Email</button>
+                            <button onclick="changeSort('dateTime')" type="button" class="dropdown-item fw-semibold text-black-50" href="#">Creation Time</button>
+                            <button onclick="changeSort('orderAmount')" type="button" class="dropdown-item fw-semibold text-black-50" href="#">Amount</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -89,7 +81,7 @@ include "nav.php";
             <th scope="col" class="col-auto"></th>
         </tr>
         </thead>
-        <tbody class="bg-light " style="font-size: 1.3rem">
+        <tbody id="orderListTable" class="bg-light " style="font-size: 1.3rem">
         <tr class="align-middle mt-5 "
             style="box-shadow:  0 8px 15px -6px rgba(8,72,98,0.38)
 ">
@@ -311,9 +303,27 @@ include "nav.php";
         const orderID = $(button).attr('data-bs-orderid')
 
         // calling ajax
+
+        const postData = {
+            targetID: orderID,
+        }
         console.log($(modal))
         console.log($(modal).find('.modal-title').text(`Sales Order#${orderID}`))
-        console.log($(modal).find('.modal-body input').val(orderID))
+        $.ajax({
+            data: postData,
+            type: "POST",
+            url: "getOrderDetail.php",
+            success: function (response) {
+                const res = jQuery.parseJSON(response)
+                if (res.status == 200) {
+                    $(modal).find('.modal-body').html(res.message);
+                }
+            }
+        })
+    })
+
+    $(modal).on("hidden.bs.modal", function () {
+        $(modal).find('.modal-body').html('');
     })
 
     function toggleSave(reset) {
@@ -330,14 +340,49 @@ include "nav.php";
         }
     }
 
-    const UpdateForm = $('#updateDeliveryForm')
-    $(UpdateForm).submit(function (e) {
+    function submitDeliveryForm (event){
+        const UpdateForm = $('#updateDeliveryForm')
         console.log(UpdateForm[0].checkValidity())
         if(!UpdateForm[0].checkValidity()) {
-            e.preventDefault();
-            e.stopPropagation();
+            event.preventDefault();
+            event.stopPropagation();
         }
         UpdateForm.addClass('was-validated')
+    }
+
+    var sort = "orderID";
+    var searchBar = $('#search')
+
+    function changeSort(order) {
+        sort = order;
+        getOrderList()
+    }
+
+    getOrderList()
+    function getOrderList(){
+       // console.log(searchBar.val())
+        const postData = {
+           target: searchBar.val(),
+           order: sort
+        }
+        // console.log(postData);
+        $.ajax({
+            data: postData,
+            type: "POST",
+            url: "getOrderList.php",
+            success: function (response) {
+                const res = jQuery.parseJSON(response)
+                if (res.status == 200) {
+                    $('#orderListTable').html(res.message);
+                }
+            }
+        })
+    }
+
+    $(searchBar).on('keypress', function (e) {
+        if (e.which == 13) {
+            getOrderList();
+        }
     })
 
 </script>
