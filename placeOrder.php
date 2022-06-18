@@ -44,8 +44,6 @@ include "nav.php"?>
 <!--    </nav>-->
     <!--Breadcrumb-->
 
-
-
     <div class="progress">
         <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
     </div>
@@ -90,10 +88,17 @@ include "nav.php"?>
                                                 <!--Hidden element-->
 
                                                 <!--Submit button-->
-                                                <input type="button" class="btn btn-warning " name="addToCart" value="Add To Cart" onclick="addtoCart(this)">
+
+                                                <?php
+
+                                                    if ($stockQuantity==0){
+                                                        echo '<input type="button" class="btn btn-secondary " value="Out Stock" disabled>';
+                                                    }else{
+                                                        echo '<input type="button" class="btn btn-warning " name="addToCart" value="Add To Cart" onclick="addtoCart(this)">';
+                                                    }
+                                                ?>
                                                 <!--<i class="fas fa-shopping-cart"></i>-->
                                                 <!--</input>-->
-
                                             </form>
                                         </div>
                                     </div>
