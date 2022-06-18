@@ -279,7 +279,6 @@ if(isset($_POST['checkoutForResult'])){
                 }
 
                 unset($_SESSION['cart']);
-
                 mysqli_close($conn);
 
             }
@@ -287,11 +286,13 @@ if(isset($_POST['checkoutForResult'])){
                 ?>
 
                 <!-- Display total price-->
-                <form action="" method="post">
+                <form action="placeOrder.php">
                     <div class="d-grid gap-2 col-4 mx-auto">
-                            <button type="submit" name="back" class="btn btn-outline-dark" >BACK</button>
+                        <button type="submit"  class="btn btn-outline-dark" >BACK</button>
                     </div>
                 </form>
+                <!-- Display total price-->
+
 
 <!--                <div class="progress position-absolute bottom-0 start-0 w-100 " style="height:10px">-->
 <!---->
