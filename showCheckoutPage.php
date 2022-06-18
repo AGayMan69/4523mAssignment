@@ -13,5 +13,7 @@ if(!empty($_SESSION['cart'])){
         //var_dump($_SESSION['cart']);
         header("location:checkoutCustomer.php"); # redirect browser to this page
     }
+}else{
+    header("location:placeOrder.php"); # redirect browser to this page
 }
 

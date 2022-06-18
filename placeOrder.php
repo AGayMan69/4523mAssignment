@@ -24,7 +24,7 @@ include "database_connection.php";
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Shopping Cart</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
@@ -43,8 +43,6 @@ include "nav.php"?>
 <!--        </ol>-->
 <!--    </nav>-->
     <!--Breadcrumb-->
-
-
 
     <div class="progress">
         <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
@@ -90,10 +88,17 @@ include "nav.php"?>
                                                 <!--Hidden element-->
 
                                                 <!--Submit button-->
-                                                <input type="button" class="btn btn-warning " name="addToCart" value="Add To Cart" onclick="addtoCart(this)">
+
+                                                <?php
+
+                                                    if ($stockQuantity==0){
+                                                        echo '<input type="button" class="btn btn-secondary " value="Out Stock" disabled>';
+                                                    }else{
+                                                        echo '<input type="button" class="btn btn-warning " name="addToCart" value="Add To Cart" onclick="addtoCart(this)">';
+                                                    }
+                                                ?>
                                                 <!--<i class="fas fa-shopping-cart"></i>-->
                                                 <!--</input>-->
-
                                             </form>
                                         </div>
                                     </div>
