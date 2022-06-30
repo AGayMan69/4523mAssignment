@@ -33,7 +33,7 @@ if(isset($_POST['checkoutForResult'])){
         $conn = getDBconnection();
         $newOrderId = GetNewOrderID($conn);
         $orderCreateDate = date("Y/m/d");
-        $discount = 0.85;
+        $discount = $_SESSION['discountRate'];
         $current_user = $_SESSION['User']['ID'];
 
         //customername,phonenumber,emailaddress,customeraddress,deliverydat,checkoutForResult
@@ -209,12 +209,12 @@ if(isset($_POST['checkoutForResult'])){
 
                     <div class="d-flex flex-row justify-content-between  mx-3">
                         <h6>Discount</h6>
-                        <span id="discount">-<?=$orderAmount - $orderAmount * $discount?></span>
+                        <span id="discount">-<?=$orderAmount * $discount?></span>
                     </div>
 
                     <div class="d-flex flex-row justify-content-between  mx-3">
                         <h6>Total</h6>
-                        <span id="total"><?=$orderAmount * $discount?></span>
+                        <span id="total"><?=$orderAmount * (1-$discount)?></span>
                     </div>
                 </div>
                 <?php
@@ -246,7 +246,7 @@ if(isset($_POST['checkoutForResult'])){
 
                 //Insert to orders table
                 $sql = "INSERT INTO orders VALUES ";
-                $new_Price = $orderAmount*$discount;
+                $new_Price = $orderAmount*(1-$discount);
                 if (isset($_POST['deliverydate'])){
                     $sql.= "('$newOrderId','$emailaddress','$current_user',NOW(),'$customeraddress','$deliverydate','$new_Price')";
                 }else{

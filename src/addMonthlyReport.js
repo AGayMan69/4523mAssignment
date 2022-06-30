@@ -11,10 +11,7 @@ $(document).ready(function (){
                 // $('#mainContainer').append($htmlString);
             // }
             for(var k in result) {
-                console.log(k, result[k]);
-                console.log(result[k][1]);
                 $('#mainContainer').append(getStaffCard(result[k][0],result[k][1],result[k][2],result[k][3]));
-                console.log(result[k][2]/100);
             }
         }
     });

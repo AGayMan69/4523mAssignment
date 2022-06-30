@@ -92,7 +92,7 @@ include "nav.php"?>
                                                 <?php
 
                                                     if ($stockQuantity==0){
-                                                        echo '<input type="button" class="btn btn-secondary " value="Out Stock" disabled>';
+                                                        echo '<input type="button" class="btn btn-secondary " value="Out Of Stock" disabled>';
                                                     }else{
                                                         echo '<input type="button" class="btn btn-warning " name="addToCart" value="Add To Cart" onclick="addtoCart(this)">';
                                                     }
@@ -119,7 +119,7 @@ include "nav.php"?>
                         <h1>Shopping Cart</h1>
                     </div>
 
-                    <div class="table-responsive">
+                    <div class="table-responsive" >
                         <table class="shopping_cart table table-bordered">
                             <tr>
                                 <th class="w-40">Name</th>
@@ -145,7 +145,7 @@ include "nav.php"?>
 
                                         <td>
                                             <input type="hidden"  name="itemID" value="<?=$itemID?>">
-                                            <input type="number" class="itemqty" name="buyqty" min="1" max="<?=$stockQuantity?>" value="<?=$qty?>"   onchange="updateQuantity(<?=$itemID?>,this)">
+                                            <input type="number" class="itemqty" name="buyqty" min="1" max="<?=$stockQuantity?>" value="<?=$qty?>"  onchange="updateQuantity(<?=$itemID?>,this)">
                                         </td>
 
                                         <td>$<?=$price?>
@@ -172,19 +172,18 @@ include "nav.php"?>
                         <div class="order">
                             <div class="d-flex flex-row justify-content-between p-3 mx-3">
                                 <span>Subtotal</span>
-                                <span  id="subTotalSpan">XXX</span>
+                                <span  id="subTotalSpan">0</span>
                             </div>
 
                             <div class="d-flex flex-row justify-content-between p-3 mx-3">
                                 <span>Discount</span>
-                                <span>-0</span>
+                                <span id="differenceSpan">-0</span>
                             </div>
 
                             <div class="d-flex flex-row justify-content-between p-3 mx-3">
                                 <span>Total</span>
-                                <span>0</span>
+                                <span id="newTotalSpan">0</span>
                             </div>
-
 
                             <div class="d-flex flex-row justify-content-end p-5">
                             <!--    <button class="btn btn-primary mx-2">Enter Shipment Details</button>-->
@@ -219,6 +218,7 @@ include "nav.php"?>
         crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <script type="text/javascript" src="src/placeOrder.js"></script>
+<script type="text/javascript" src="src/getOrderTotal.js"></script>
 </body>
 </html>
 
