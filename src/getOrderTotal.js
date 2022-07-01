@@ -5,7 +5,7 @@ $(document).ready(function() {
     });
     function ajax(){
         $.ajax({
-            type:"POST",
+            type:"get",
             url: "getOrderTotal.php",
             dataType:'json',
             success:function(result){
