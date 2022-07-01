@@ -279,6 +279,7 @@ if(isset($_POST['checkoutForResult'])){
                 }
 
                 unset($_SESSION['cart']);
+                unset($_SESSION['discountRate']);
                 mysqli_close($conn);
 
             }
