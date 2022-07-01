@@ -49,7 +49,10 @@ include "nav.php";
         </div>
         <div class="col-12 col-lg-5">
             <div class="ulti-btn row justify-content-lg-end justify-content-start ms-lg-0 ms-1">
-                <button class="btn btn-primary col-4">Add Item</button>
+                <button class="btn btn-primary col-4"
+                        data-bs-toggle="modal"
+                        data-bs-target="#itemAddModal"
+                >Add Item</button>
                 <div class="dropdown col-auto" >
                     <a href="#" class="btn btn-light dropdown-toggle fw-semibold text-black-50 fs-5"
                        id="sortDropDown" data-bs-toggle="dropdown" role="button">
@@ -81,27 +84,6 @@ include "nav.php";
         </tr>
         </thead>
         <tbody id="itemListTable" class="bg-light " style="font-size: 1.3rem">
-        <tr class="align-middle mt-5 "
-            style="box-shadow:  0 8px 15px -6px rgba(8,72,98,0.38)
-">
-            <th scope="row" class="text-center">1</th>
-            <td>NOVEL NF4091 9”All-way Strong Wind Circulation Fan</td>
-            <td class="d-none d-lg-table-cell">Simple Design with 3D stereo blower Turbo super strong wind up</td>
-            <td>50</td>
-            <td>$500</td>
-            <td class="text-center">
-                <button
-                        class="btn btn-success align-middle text-uppercase fw-semibold fs-6"
-                        style="max-width: 8em; letter-spacing: 0.05ch"
-                        data-bs-toggle="modal"
-                        data-bs-target="#orderModal"
-                        data-bs-itemid="1"
-                >
-                    <i class="bi bi-info-circle-fill d-none d-md-inline-block"></i>
-                    Detail
-                </button>
-            </td>
-        </tr>
         </tbody>
     </table>
 
@@ -128,7 +110,7 @@ include "nav.php";
                                            class="form-control"
                                            required
                                            placeholder="Product name...."
-                                           value="NOVEL NF4091 9”All-way Strong Wind Circulation Fan"
+                                           value=""
                                     >
                                     <div class="invalid-feedback">
                                         Please provide a product name!
@@ -143,21 +125,21 @@ include "nav.php";
                                     <textarea name="description" placeholder="Product Description..." id="formDescription" rows="4"
                                     class="form-control"
                                               required
-                                    >Simple Design with 3D stereo blower Turbo super strong wind up</textarea>
+                                    ></textarea>
                                     <div class="invalid-feedback">
                                         Please enter product description!
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="" class="form-label fs-5 fw-semibold">Stock Quantity</label>
-                                    <input type="number" class="form-control" value="50" placeholder="Product Quantity..." required>
+                                    <input type="number" class="form-control" value="" placeholder="Product Quantity..." required>
                                     <div class="invalid-feedback">
                                         Please enter quantity!
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="" class="form-label fs-5 fw-semibold">Price</label>
-                                    <input type="number" class="form-control" value="500" placeholder="Product Price..." required>
+                                    <input type="number" class="form-control" value="" placeholder="Product Price..." required>
                                     <div class="invalid-feedback">
                                         Please enter price!
                                     </div>
@@ -193,6 +175,92 @@ include "nav.php";
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="itemAddModal" tabindex="-1" data-bs-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content"
+                 style="background-color: hsl(189, 15%, 95%)"
+            >
+                <div class="modal-header px-5 text-light bg-dark"
+                     style="border-bottom: 0 none;"
+                >
+                    <h3 class="modal-title" id="exampleModalLabel">Add Item</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body container-fluid px-5">
+                    <form id="addItemForm" class="row g-5 mt-1 needs-validation"
+                          novalidate
+                          method="post"
+                          action="addItem.php"
+                          onsubmit="return submitItemForm(event)"
+                    >
+
+                        <img src="./images/products/product-image-placeholder.jpg" alt="" class="rounded col-12"
+                             style="max-width: 25em; object-fit: scale-down"
+                        >
+                        <fieldset class="col row pt-5">
+                            <div class="col-md-6 mt-3 mb-3">
+                                <label for="" class="form-label fs-5 fw-semibold">Name</label>
+                                <input type="text"
+                                       class="form-control"
+                                       required
+                                       placeholder="Product name...."
+                                       name="name"
+                                       value=""
+                                >
+                                <div class="invalid-feedback">
+                                    Please provide a product name!
+                                </div>
+                            </div>
+                            <div class="w-100"></div>
+
+                            <div class="col-md-12 mb-3">
+                                <label for=""
+                                       class="form-label fs-5 fw-semibold"
+                                >Description</label>
+                                <textarea name="description" placeholder="Product Description..." id="formDescription" rows="4"
+                                          class="form-control"
+                                          required
+                                ></textarea>
+                                <div class="invalid-feedback">
+                                    Please enter product description!
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="" class="form-label fs-5 fw-semibold">Stock Quantity</label>
+                                <input type="number" name="quantity" class="form-control" value="" placeholder="Product Quantity..." required>
+                                <div class="invalid-feedback">
+                                    Please enter quantity!
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="" class="form-label fs-5 fw-semibold">Price</label>
+                                <input type="number" name="price" class="form-control" value="" placeholder="Product Price..." required>
+                                <div class="invalid-feedback">
+                                    Please enter price!
+                                </div>
+                            </div>
+                        </fieldset>
+
+                    </form>
+                </div>
+                <div class="modal-footer px-5"
+                     style="border-top: 0 none;">
+                    <button type="submit" form="addItemForm" class="save-btn btn btn btn-primary fw-semibold"
+                            onclick=""
+                    >
+                        <i class="bi bi-check"></i>
+                        Submit
+                    </button>
+                    <button type="button" class="cancel-btn  btn btn btn-outline-danger fw-semibold" data-bs-dismiss="modal"
+                    >
+                        <i class="bi bi-x"></i>
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
@@ -202,7 +270,9 @@ include "nav.php";
 
 <script>
     const modal = $('#orderModal')
+    let UpdateForm;
     $(modal).on("show.bs.modal", event => {
+        UpdateForm = $('#updateItemForm')
         const button = event.relatedTarget
         const itemID = $(button).attr('data-bs-itemid')
 
@@ -223,18 +293,7 @@ include "nav.php";
         })
         console.log($(modal))
         console.log($(modal).find('.modal-title').text(`Item#${itemID}`))
-        // $(modal).find('fieldset').attr('disabled', 'disabled')
     })
-
-    function submitItemForm (event){
-        const UpdateForm = $('#updateItemForm')
-        console.log(UpdateForm[0].checkValidity())
-        if(!UpdateForm[0].checkValidity()) {
-            event.preventDefault();
-            event.stopPropagation();
-        }
-        UpdateForm.addClass('was-validated')
-    }
 
     function toggleSave(reset) {
         if (reset === true) {
@@ -251,15 +310,14 @@ include "nav.php";
         }
     }
 
-    const UpdateForm = $('#updateItemForm')
-    $(UpdateForm).submit(function (e) {
-        console.log(UpdateForm[0].checkValidity())
-        if(!UpdateForm[0].checkValidity()) {
+    const AddForm = $('#addItemForm')
+    function submitItemForm(e) {
+        if(!e.target.checkValidity()) {
             e.preventDefault();
             e.stopPropagation();
+            e.target.classList.add('was-validated')
         }
-        UpdateForm.addClass('was-validated')
-    })
+    }
 
     var sort = "itemID";
     var searchBar = $('#search')

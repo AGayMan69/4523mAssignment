@@ -50,7 +50,7 @@ include "nav.php";
         </div>
         <div class="col-12 col-lg-5">
             <div class="ulti-btn row justify-content-lg-end justify-content-start ms-lg-0 ms-1">
-                <button class="btn btn-primary col-4">Create Order</button>
+                <button class="btn btn-primary col-4 btn-create-order">Create Order</button>
                 <div class="dropdown col-auto" >
                     <a href="#" class="btn btn-light dropdown-toggle fw-semibold text-black-50 fs-5"
                        id="sortDropDown" data-bs-toggle="dropdown" role="button">
@@ -383,6 +383,10 @@ include "nav.php";
         if (e.which == 13) {
             getOrderList();
         }
+    })
+    const createBtn = $('.btn-create-order')
+    $(createBtn).on('click', function () {
+        window.location.href = './placeOrder.php'
     })
 
 </script>
