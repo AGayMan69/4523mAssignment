@@ -25,7 +25,7 @@ session_start();
     <!--Breadcrumb-->
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb py-2">
-            <li class="breadcrumb-item lead" ><a href="#" style="text-decoration: none">Cart</a></li>
+            <li class="breadcrumb-item lead" ><a href="placeOrder.php" style="text-decoration: none">Cart</a></li>
             <li class="breadcrumb-item active lead" aria-current="page">Customer Info</li>
         </ol>
     </nav>
@@ -36,7 +36,7 @@ session_start();
 
             <div class="signup-form">
 
-                <form action="checkoutResult.php" method="post" class="mt-5 border p-4 bg-light shadow">
+                <form action="checkoutResult.php" method="post" class="needs-validation mt-5 border p-4 bg-light shadow" novalidate>
 
                     <h4 class="mb-3 text-secondary">Customer Information</h4>
 
@@ -45,19 +45,28 @@ session_start();
                         <!--Custome Name-->
                         <div class="mb-3 col-md-6">
                             <label><span>Customer Name</span></label>
-                            <input type="text" name="customername" class="form-control" >
+                            <input type="text" name="customername" class="form-control" required>
+                            <div class="invalid-feedback">
+                                Please provide a customer name
+                            </div>
                         </div>
 
                         <!--Phone Number-->
                         <div class="mb-3 col-md-6">
                             <label><span>Phone Number</span></label>
-                            <input type="tel" name="phonenumber" class="form-control">
+                            <input type="tel" name="phonenumber" class="form-control" pattern="^\d{8}$" required>
+                            <div class="invalid-feedback">
+                                Please provide a valid phone number
+                            </div>
                         </div>
 
                         <!--Email address-->
                         <div class="mb-3 col-md-6">
                             <label><span>Email</span></label>
-                            <input type="email" name="emailaddress" class="form-control" placeholder="someone@gmail.com">
+                            <input type="email" name="emailaddress" class="form-control" placeholder="someone@example.com" required>
+                            <div class="invalid-feedback">
+                                Please provide a valid email
+                            </div>
                         </div>
 
                         <div class="row">
@@ -66,13 +75,19 @@ session_start();
                         <!--Customer address-->
                         <div class="mb-3 col-md-12">
                             <label><span>Customer Address</span></label>
-                            <input type="text" name="customeraddress" class="form-control">
+                            <input type="text" name="customeraddress" class="form-control" required>
+                            <div class="invalid-feedback">
+                                Please provide a valid address
+                            </div>
                         </div>
 
                         <!--Delivery Date-->
                         <div class="mb-3 col-md-6">
                             <label><span>Delivery Date</span></label>
-                            <input type="date" name="deliverydate"  class="form-control">
+                            <input type="date" name="deliverydate"  class="form-control" required>
+                            <div class="invalid-feedback">
+                                Please select a valid date
+                            </div>
                         </div>
 
                             <!--Submit & Reset button-->
@@ -106,5 +121,22 @@ session_start();
         integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
         crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+
+<script>
+    //Select all the form
+    var forms = document.querySelectorAll(".needs-validation");
+
+    Array.prototype.slice.call(forms)
+        .forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+
+                form.classList.add('was-validated')
+            }, false)
+        });
+</script>
 </body>
 </html>

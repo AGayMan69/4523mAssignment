@@ -64,7 +64,7 @@ if(isset($_POST['checkoutForResult'])){
     <!--Breadcrumb-->
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb py-2">
-            <li class="breadcrumb-item lead" ><a href="#" style="text-decoration: none">Cart</a></li>
+            <li class="breadcrumb-item lead" ><a href="placeOrder.php" style="text-decoration: none">Cart</a></li>
             <li class="breadcrumb-item active lead" aria-current="page">New Order</li>
         </ol>
     </nav>
