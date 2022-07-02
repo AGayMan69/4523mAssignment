@@ -142,9 +142,9 @@ if(isset($_POST['checkoutForResult'])){
                     </tbody>
                 </table>
 
-                <hr class="my-2">
+<!--                <hr class="my-2">-->
 
-                <div class="row">
+                <div class="row px-5">
 
 
                     <div class="card-body col-4 ">
@@ -184,24 +184,8 @@ if(isset($_POST['checkoutForResult'])){
                 ?>
 
 
-<!--                <div class="row">-->
-<!---->
-<!--                    <div class="col-12 my-1">-->
-<!---->
-<!--                            <div class="fw-semibold">Delivery Date</div>-->
-<!--                            <span >0</span>-->
-<!---->
-<!--                    </div>-->
-<!---->
-<!--                    <div class="col-12">-->
-<!--                        <div class="fw-semibold">Delivery Date</div>-->
-<!--                        <span>0</span>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-
                 <!-- Display total price-->
-                <div class="order my-5">
+                <div class="order my-5 px-5">
                     <div class="d-flex flex-row justify-content-between  mx-3">
                         <h6>Subtotal</h6>
                         <span id="subTotal">HK$<?=$orderAmount?></span>
@@ -209,12 +193,12 @@ if(isset($_POST['checkoutForResult'])){
 
                     <div class="d-flex flex-row justify-content-between  mx-3">
                         <h6>Discount</h6>
-                        <span id="discount">-<?=$orderAmount * $discount?></span>
+                        <span id="discount">-HK$<?=$orderAmount * $discount?></span>
                     </div>
 
                     <div class="d-flex flex-row justify-content-between  mx-3">
                         <h6>Total</h6>
-                        <span id="total"><?=$orderAmount * (1-$discount)?></span>
+                        <span id="total">HK$<?=$orderAmount * (1-$discount)?></span>
                     </div>
                 </div>
                 <?php
@@ -268,10 +252,6 @@ if(isset($_POST['checkoutForResult'])){
 
                             $newStockQuantity = $_SESSION['cart'][$itemID]['stockQuantity'] - $qty;
 
-//                            echo "butQty: $qty \n";
-//                            echo "itemorignalQty: {$_SESSION['cart'][$itemID]['stockQuantity']} \n";
-//                            echo "newStockQuantity: $newStockQuantity \n";
-
                             $sql = "UPDATE item SET stockQuantity='$newStockQuantity' WHERE itemID ='$itemID'";
                             mysqli_query($conn, $sql) or die (mysqli_error($conn));
                         }
@@ -294,11 +274,6 @@ if(isset($_POST['checkoutForResult'])){
                 </form>
                 <!-- Display total price-->
 
-
-<!--                <div class="progress position-absolute bottom-0 start-0 w-100 " style="height:10px">-->
-<!---->
-<!--                    <div class="progress-bar w-100" role="progressbar"  aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" ></div>-->
-<!--                </div>-->
             </div>
         </div>
     </div>
