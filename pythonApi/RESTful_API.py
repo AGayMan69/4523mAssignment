@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 @app.route("/api/discountCalculator/<total>")
 def process(total=None):
-    totalPrice = int(total)
+    totalPrice = float(total)
     discountRate = 0
     if totalPrice >= 10000:
         discountRate = 0.12

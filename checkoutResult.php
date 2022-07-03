@@ -188,17 +188,17 @@ if(isset($_POST['checkoutForResult'])){
                 <div class="order my-5 px-5">
                     <div class="d-flex flex-row justify-content-between  mx-3">
                         <h6>Subtotal</h6>
-                        <span id="subTotal">HK$<?=$orderAmount?></span>
+                        <span id="subTotal" class="fw-bold">HK$ <?=round($orderAmount,1) ?></span>
                     </div>
 
                     <div class="d-flex flex-row justify-content-between  mx-3">
                         <h6>Discount</h6>
-                        <span id="discount">-HK$<?=$orderAmount * $discount?></span>
+                        <span id="discount">-HK$ <?=round($orderAmount * $discount,1)?></span>
                     </div>
 
                     <div class="d-flex flex-row justify-content-between  mx-3">
                         <h6>Total</h6>
-                        <span id="total">HK$<?=$orderAmount * (1-$discount)?></span>
+                        <span id="total" class="fw-bold">HK$ <?=round($orderAmount * (1-$discount),1)?></span>
                     </div>
                 </div>
                 <?php
@@ -230,7 +230,7 @@ if(isset($_POST['checkoutForResult'])){
 
                 //Insert to orders table
                 $sql = "INSERT INTO orders VALUES ";
-                $new_Price = $orderAmount*(1-$discount);
+                $new_Price = round($orderAmount*(1-$discount),1);
                 if (isset($_POST['deliverydate'])){
                     $sql.= "('$newOrderId','$emailaddress','$current_user',NOW(),'$customeraddress','$deliverydate','$new_Price')";
                 }else{

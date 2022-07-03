@@ -15,9 +15,9 @@ if (isset($_SESSION['cart'])) {
     curl_close($curl);
 
     $data = json_decode($response,true);
-    $data['originalTotal'] = $orderAmount;
-    $data['newTotal'] = $orderAmount-($orderAmount*$data['discountRate']) ;
-    $data['difference'] = $orderAmount- $data['newTotal'] ;
+    $data['originalTotal'] = round($orderAmount,1);
+    $data['newTotal'] = round($orderAmount-($orderAmount*$data['discountRate']),1);
+    $data['difference'] = round(($orderAmount- $data['newTotal']),1) ;
 
     $_SESSION['discountRate'] = $data['discountRate'];
 

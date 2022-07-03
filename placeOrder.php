@@ -28,13 +28,18 @@ include "database_connection.php";
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+
+    <style type="text/css">
+        input[type='number']{
+            width: 50px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 <?php
 include "nav.php"?>
 <div class="container" xmlns="http://www.w3.org/1999/html">
-
-
 
     <!--Breadcrumb-->
 <!--    <nav aria-label="breadcrumb">-->
@@ -44,9 +49,9 @@ include "nav.php"?>
 <!--    </nav>-->
     <!--Breadcrumb-->
 
-    <div class="progress">
-        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-    </div>
+<!--    <div class="progress">-->
+<!--        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>-->
+<!--    </div>-->
 
     <div class="col-md-12">
         <div class="row text-center">
@@ -68,7 +73,7 @@ include "nav.php"?>
                             <div class="col-lg-4 col-md-6 col-sm-12 d-flex align-self-stretch py-2">
                                 <div class="card shadow-sm mb-4">
                                     <!--Product Image-->
-                                    <img src="images/products/<?=$itemID?>.png" class="card-img-top" alt="">
+                                    <img src="images/products/No-Image-Placeholder.svg" class="card-img-top pt-2" alt="">
                                     <div class="card-body d-flex flex-column">
                                         <!--Product Name-->
                                         <h6 class="card-title text-uppercase"><?=$itemName?></h6>
@@ -77,29 +82,29 @@ include "nav.php"?>
                                             <!--Price tag-->
                                             <p class="text-uppercase mb-0 py-2">HK$<?=$price?></p>
 
-                                            <!--Page anchor #form-anchor id="form-anchor"-->
-                                            <form method="post" action="<?php echo $_SERVER['PHP_SELF']?>" id="addCarti<?=$itemID?>" >
+                                                <!--Page anchor #form-anchor id="form-anchor"-->
+                                                <form method="post" action="<?php echo $_SERVER['PHP_SELF']?>" id="addCarti<?=$itemID?>" >
 
-                                                <!--Hidden element-->
-                                                <input type="hidden" name="itemID" value="<?=$itemID?>">
-                                                <input type="hidden" name="itemName" value="<?=$itemName?>">
-                                                <input type="hidden" name="price" value="<?=$price?>">
-                                                <input type="hidden" name="stockQuantity" value="<?=$stockQuantity?>">
-                                                <!--Hidden element-->
+                                                    <!--Hidden element-->
+                                                    <input type="hidden" name="itemID" value="<?=$itemID?>">
+                                                    <input type="hidden" name="itemName" value="<?=$itemName?>">
+                                                    <input type="hidden" name="price" value="<?=$price?>">
+                                                    <input type="hidden" name="stockQuantity" value="<?=$stockQuantity?>">
+                                                    <!--Hidden element-->
 
-                                                <!--Submit button-->
+                                                    <!--Submit button-->
 
-                                                <?php
+                                                    <?php
 
-                                                    if ($stockQuantity==0){
-                                                        echo '<input type="button" class="btn btn-secondary " value="Out Of Stock" disabled>';
-                                                    }else{
-                                                        echo '<input type="button" class="btn btn-warning " name="addToCart" value="Add To Cart" onclick="addtoCart(this)">';
-                                                    }
-                                                ?>
-                                                <!--<i class="fas fa-shopping-cart"></i>-->
-                                                <!--</input>-->
-                                            </form>
+                                                        if ($stockQuantity==0){
+                                                            echo '<input type="button" class="btn btn-secondary " value="Out Of Stock" disabled>';
+                                                        }else{
+                                                            echo '<input type="button" class="btn btn-warning " name="addToCart" value="Add To Cart" onclick="addtoCart(this)">';
+                                                        }
+                                                    ?>
+                                                    <!--<i class="fas fa-shopping-cart"></i>-->
+                                                    <!--</input>-->
+                                                </form>
                                         </div>
                                     </div>
                                 </div>
@@ -172,7 +177,7 @@ include "nav.php"?>
                         <div class="order">
                             <div class="d-flex flex-row justify-content-between p-3 mx-3">
                                 <span>Subtotal</span>
-                                <span  id="subTotalSpan">0</span>
+                                <span  id="subTotalSpan" class="fw-bold">0</span>
                             </div>
 
                             <div class="d-flex flex-row justify-content-between p-3 mx-3">
@@ -182,7 +187,7 @@ include "nav.php"?>
 
                             <div class="d-flex flex-row justify-content-between p-3 mx-3">
                                 <span>Total</span>
-                                <span id="newTotalSpan">0</span>
+                                <span id="newTotalSpan" class="fw-bold">0</span>
                             </div>
 
                             <div class="d-flex flex-row justify-content-end p-5">
