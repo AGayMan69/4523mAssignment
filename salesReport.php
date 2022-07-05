@@ -38,7 +38,6 @@ include "nav.php";
             Monthly Report
         </h1>
 
-
 <!--        <div class="staff-card row my-5 shadow-lg p-5 bg-dark text-light rounded-5">-->
 <!--            <div class="col-md-6">-->
 <!--                <div class="row justify-content-md-start justify-content-center" style="padding: 0; margin: 0">-->

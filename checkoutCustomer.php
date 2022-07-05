@@ -14,7 +14,7 @@ session_start();
           integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
 </head>
-<body>
+<body style="background-color: hsl(189, 15%, 90%)">
 <?php include "nav.php";?>
 
 <div class="container position-relative" style="min-height: 80vh ">

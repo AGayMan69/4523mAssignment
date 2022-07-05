@@ -36,22 +36,11 @@ include "database_connection.php";
         }
     </style>
 </head>
-<body>
+<body style="background-color: hsl(189, 15%, 90%)">
 <?php
 include "nav.php"?>
 <div class="container" xmlns="http://www.w3.org/1999/html">
 
-    <!--Breadcrumb-->
-<!--    <nav aria-label="breadcrumb">-->
-<!--        <ol class="breadcrumb py-2">-->
-<!--            <li class="breadcrumb-item active lead" aria-current="page">Cart</li>-->
-<!--        </ol>-->
-<!--    </nav>-->
-    <!--Breadcrumb-->
-
-<!--    <div class="progress">-->
-<!--        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>-->
-<!--    </div>-->
 
     <div class="col-md-12">
         <div class="row text-center">
@@ -92,8 +81,7 @@ include "nav.php"?>
                                                     <input type="hidden" name="stockQuantity" value="<?=$stockQuantity?>">
                                                     <!--Hidden element-->
 
-                                                    <!--Submit button-->
-
+                                                    <!--Add to Cart button-->
                                                     <?php
 
                                                         if ($stockQuantity==0){
@@ -102,8 +90,6 @@ include "nav.php"?>
                                                             echo '<input type="button" class="btn btn-warning " name="addToCart" value="Add To Cart" onclick="addtoCart(this)">';
                                                         }
                                                     ?>
-                                                    <!--<i class="fas fa-shopping-cart"></i>-->
-                                                    <!--</input>-->
                                                 </form>
                                         </div>
                                     </div>
@@ -115,63 +101,68 @@ include "nav.php"?>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <!--Card top margin-->
-                <div class="py-2"></div>
 
-                <div class="card py-3">
+            <div class="col-md-6 py-4">
+                <div class="card py-3 shadow">
+
                     <div class="d-flex flex-row justify-content-start p-4">
                         <h1>Shopping Cart</h1>
                     </div>
 
-                    <div class="table-responsive" >
-                        <table class="shopping_cart table table-bordered">
-                            <tr>
-                                <th class="w-40">Name</th>
-                                <th class="w-5">Quantity</th>
-                                <th class="w-20">Price</th>
-                                <th class="w-20">Total</th>
-                                <th class="w-5">&nbsp</th>
-                            </tr>
+                    <div class="card-body">
+                        <!--Shopping Cart Table-->
+                        <div class="table-responsive" >
+                            <table class="shopping_cart table">
+                                <thead>
+                                <tr>
+                                    <th class="w-40">Name</th>
+                                    <th class="w-5">Quantity</th>
+                                    <th class="w-20">Price</th>
+                                    <th class="w-20">Total</th>
+                                    <th class="w-5">&nbsp</th>
+                                </tr>
+                                </thead>
 
-                            <?php
-                            if(!empty($_SESSION['cart']))
-                            {
-                                $amount=0;
-//                                var_dump($_SESSION['cart']);
-                                foreach ($_SESSION['cart'] as $items){
-                                    extract($items);
-                                    // $itemID $itemName $itemDescription $stockQuantity $price
-                                    ?>
-                                    <tr class="itemRow<?=$itemID?>">
-                                        <td>
-                                            <?=$itemName?>
-                                        </td>
+                                <tbody>
+                                <?php
+                                if(!empty($_SESSION['cart']))
+                                {
+                                    $amount=0;
+                                    //var_dump($_SESSION['cart']);
+                                    foreach ($_SESSION['cart'] as $items){
+                                        extract($items);
+                                        // $itemID $itemName $itemDescription $stockQuantity $price
+                                        ?>
+                                        <tr class="itemRow<?=$itemID?>">
+                                            <td>
+                                                <?=$itemName?>
+                                            </td>
 
-                                        <td>
-                                            <input type="hidden"  name="itemID" value="<?=$itemID?>">
-                                            <input type="number" class="itemqty" name="buyqty" min="1" max="<?=$stockQuantity?>" value="<?=$qty?>"  onchange="updateQuantity(<?=$itemID?>,this)">
-                                        </td>
+                                            <td>
+                                                <input type="hidden"  name="itemID" value="<?=$itemID?>">
+                                                <input type="number" class="itemqty" name="buyqty" min="1" max="<?=$stockQuantity?>" value="<?=$qty?>"  onchange="updateQuantity(<?=$itemID?>,this)">
+                                            </td>
 
-                                        <td>$<?=$price?>
-                                            <input type="hidden" class="itemprice" value="<?=$price?>">
-                                        </td>
+                                            <td>$<?=$price?>
+                                                <input type="hidden" class="itemprice" value="<?=$price?>">
+                                            </td>
 
-                                        <td class="itemamount">
-                                           $<?=$price*$qty?>
-                                        </td>
+                                            <td class="itemamount">
+                                               $<?=$price*$qty?>
+                                            </td>
 
-                                        <td>
-                                            <form method="post" action="deleteCart.php">
-                                                <input type="hidden" name="removeItemID" value="<?=$itemID?>">
-                                                <input type="submit" name="removeItem" class="btn btn-sm btn-danger btn-block" value="REMOVE">
-                                            </form>
-                                        </td>
-                                    </tr>
-                                    <?php
-                                }
-                            } ?>
-                        </table>
+                                            <td>
+                                                <form method="post" action="deleteCart.php">
+                                                    <input type="hidden" name="removeItemID" value="<?=$itemID?>">
+                                                    <input type="submit" name="removeItem" class="btn btn-sm btn-danger btn-block" value="REMOVE">
+                                                </form>
+                                            </td>
+                                        </tr>
+                                        <?php
+                                    }
+                                } ?>
+                                </tbody>
+                            </table>
 
                         <!-- Display total price-->
                         <div class="order">
@@ -189,18 +180,21 @@ include "nav.php"?>
                                 <span>Total</span>
                                 <span id="newTotalSpan" class="fw-bold">0</span>
                             </div>
+                            <!-- Display total price-->
 
-                            <div class="d-flex flex-row justify-content-end p-5">
-                            <!--    <button class="btn btn-primary mx-2">Enter Shipment Details</button>-->
-                                <form action="showCheckoutPage.php" method="post">
-                                    <input type="submit" name="checkoutShipment" class="btn btn-primary mx-2" value="Enter Shipment Details">
-                                    <input type="submit" name="checkoutCustomer" class="btn btn-primary" value="Proceed to Payment">
-                                </form>
+                            <div class="d-flex flex-row justify-content-end mt-4" >
+                                <div class="mx-3">
+                                    <!--<button class="btn btn-primary mx-2">Enter Shipment Details</button>-->
+                                    <form action="showCheckoutPage.php" method="post">
+                                        <input type="submit" name="checkoutShipment" class="btn btn-primary mx-2" value="Enter Shipment Details">
+                                        <input type="submit" name="checkoutCustomer" class="btn btn-primary" value="Proceed to Payment">
+                                    </form>
+                                </div>
                             </div>
-
                         </div>
                     </div>
-                    <!-- Display total price-->
+
+                    </div>
                 </div>
 
                 <!--Progress Bar-->
@@ -213,11 +207,11 @@ include "nav.php"?>
                     <button type="button" class="position-absolute top-0 start-100 translate-middle btn btn-sm btn-secondary rounded-pill" style="width: 2rem; height:2rem;">3</button>
                 </div>
                 <!--Progress Bar-->
-
             </div>
         </div>
     </div>
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
         crossorigin="anonymous"></script>

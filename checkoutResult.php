@@ -55,7 +55,7 @@ if(isset($_POST['checkoutForResult'])){
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
 
 </head>
-<body>
+<body style="background-color: hsl(189, 15%, 90%)">
 <?php include "nav.php";?>
 
 <div class="container py-2">
