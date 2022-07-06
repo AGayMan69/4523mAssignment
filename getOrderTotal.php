@@ -17,7 +17,7 @@ if (isset($_SESSION['cart'])) {
     $data = json_decode($response,true);
     $data['originalTotal'] = round($orderAmount,1);
     $data['newTotal'] = round($orderAmount-($orderAmount*$data['discountRate']),1);
-    $data['difference'] = round(($orderAmount- $data['newTotal']),1) ;
+    $data['currentDiscount'] = $data['discountRate'];
 
     $_SESSION['discountRate'] = $data['discountRate'];
 

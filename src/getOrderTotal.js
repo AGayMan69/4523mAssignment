@@ -10,7 +10,7 @@ $(document).ready(function() {
             dataType:'json',
             success:function(result){
                 document.getElementById('subTotalSpan').innerText = result.originalTotal;
-                document.getElementById('differenceSpan').innerText = '-'+result.difference;
+                document.getElementById('differenceSpan').innerText =(result.currentDiscount*100)+"%";
                 document.getElementById('newTotalSpan').innerText = result.newTotal;
             }
         });

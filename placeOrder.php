@@ -56,6 +56,7 @@ include "nav.php"?>
                         while ($row = mysqli_fetch_assoc($rs)){
                             // $itemID $itemName $itemDescription $stockQuantity $price
                             extract($row);
+                            if ($stockQuantity!=0){
                             ?>
 
                             <!--CARD-->
@@ -82,20 +83,14 @@ include "nav.php"?>
                                                     <!--Hidden element-->
 
                                                     <!--Add to Cart button-->
-                                                    <?php
-
-                                                        if ($stockQuantity==0){
-                                                            echo '<input type="button" class="btn btn-secondary " value="Out Of Stock" disabled>';
-                                                        }else{
-                                                            echo '<input type="button" class="btn btn-warning " name="addToCart" value="Add To Cart" onclick="addtoCart(this)">';
-                                                        }
-                                                    ?>
+                                                    <input type="button" class="btn btn-warning " name="addToCart" value="Add To Cart" onclick="addtoCart(this)">
                                                 </form>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <?php
+                            }
                         }
                         ?>
                     </div>

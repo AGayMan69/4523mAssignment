@@ -193,7 +193,7 @@ if(isset($_POST['checkoutForResult'])){
 
                     <div class="d-flex flex-row justify-content-between  mx-3">
                         <h6>Discount</h6>
-                        <span id="discount">-HK$ <?=round($orderAmount * $discount,1)?></span>
+                        <span id="discount"><?=($discount*100).'%'?></span>
                     </div>
 
                     <div class="d-flex flex-row justify-content-between  mx-3">
