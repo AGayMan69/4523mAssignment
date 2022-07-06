@@ -6,13 +6,19 @@ $(document).ready(function (){
         success: function (result){
             GetReportDate();
             for(var k in result) {
-                $('#mainContainer').append(getStaffCard(result[k][0],result[k][1],result[k][2],result[k][3]));
+                $('#mainContainer').append(getStaffCard(result[k]));
             }
         }
     });
 });
 
-function getStaffCard(staffID,staffName,NoOfOrder,OrderAmount){
+//Insert employee report data to Card html
+function getStaffCard(result){
+    var staffID = result.staffID;
+    var staffName = result.staffName;
+    var NoOfOrder = result.NoOfOrder;
+    var OrderAmount = result.OrderAmount;
+
     //console.log((NoOfOrder/100)*100);
 
     $htmlString = '<div class="staff-card row my-5 shadow-lg p-5 bg-dark text-light rounded-5"><div class="col-md-6"><div class="row justify-content-md-start justify-content-center" style="padding: 0; margin: 0"><img src="https://randomuser.me/api/portraits/men/'+Math.floor(Math.random() * 10)+'.jpg" class="rounded-circle col-12 mb-4 shadow" alt="" style="max-width: 12em; padding: 0">\n' +
@@ -25,7 +31,7 @@ function getStaffCard(staffID,staffName,NoOfOrder,OrderAmount){
 
     return $htmlString;
 }
-
+//Get Current year and month
 function GetReportDate(){
     //display-3
     var dt = new Date();

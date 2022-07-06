@@ -1,17 +1,52 @@
 <?php
 include 'database_connection.php';
 
-//Mysql statement to retrieve all staff monthly report
 $conn = getDBconnection();
+
+//Mysql statement to retrieve all staff monthly report
 $query =
-    "SELECT staffID,staffName,Count(orderID) AS NoOfOrder , SUM(orderAmount) AS OrderAmount FROM staff NATURAL JOIN orders GROUP BY staffID;";
+    "SELECT staffID,staffName,Count(orderID) AS NoOfOrder , SUM(orderAmount) AS OrderAmount FROM staff NATURAL JOIN orders where dateTime >= DATE_FORMAT(NOW(), '%Y-%m-01') GROUP BY staffID;";
 $rs = mysqli_query($conn, $query) or die(mysqli_connect_error());
 
 //Convert to associate array
 $reportData = array();
-while ($row = mysqli_fetch_array($rs)){
-    $reportData[] = $row;
+while ($row = mysqli_fetch_assoc($rs)){
+    extract($row);
+        $reportData[] =
+            [
+                'staffID' => $staffID,
+                'staffName' => $staffName,
+                'NoOfOrder' => $NoOfOrder,
+                'OrderAmount' => $OrderAmount,
+            ];
 }
+mysqli_free_result($rs);
+
+//Get the employee that NoOfOrder ==0
+$query =
+    "SELECT staffID,staffName FROM staff WHERE staffID NOT IN (SELECT staffID FROM orders WHERE dateTime >= DATE_FORMAT(NOW(), '%Y-%m-01'));";
+$rs = mysqli_query($conn, $query) or die(mysqli_connect_error());
+
+//Convert to associate array
+while ($row = mysqli_fetch_assoc($rs)){
+    extract($row);
+    $reportData[] =
+        [
+            'staffID' => $staffID,
+            'staffName' => $staffName,
+            'NoOfOrder' => 0,
+            'OrderAmount' => 0,
+        ];
+}
+
+//Sort Associative Arrays by staffID
+$staffIDArray = array();
+foreach ($reportData as $key => $row)
+{
+    $staffIDArray[$key] = $row['staffID'];
+}
+array_multisort($staffIDArray, SORT_ASC, $reportData);
+
 //convert to JSON
 echo json_encode($reportData,JSON_PRETTY_PRINT);
 
@@ -19,3 +54,5 @@ echo json_encode($reportData,JSON_PRETTY_PRINT);
 mysqli_close($conn);
 //Release result set
 mysqli_free_result($rs);
+
+
