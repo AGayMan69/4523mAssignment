@@ -35,7 +35,6 @@ include "nav.php";
 
     <div class="container d-flex flex-column align-items-center bg-light p-5" style="min-height: 90vh" id="mainContainer">
         <h1 class="display-3">
-            Monthly Report
         </h1>
 
 <!--        <div class="staff-card row my-5 shadow-lg p-5 bg-dark text-light rounded-5">-->

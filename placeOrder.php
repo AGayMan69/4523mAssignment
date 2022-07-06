@@ -164,36 +164,36 @@ include "nav.php"?>
                                 </tbody>
                             </table>
 
-                        <!-- Display total price-->
-                        <div class="order">
-                            <div class="d-flex flex-row justify-content-between p-3 mx-3">
-                                <span>Subtotal</span>
-                                <span  id="subTotalSpan" class="fw-bold">0</span>
-                            </div>
-
-                            <div class="d-flex flex-row justify-content-between p-3 mx-3">
-                                <span>Discount</span>
-                                <span id="differenceSpan">-0</span>
-                            </div>
-
-                            <div class="d-flex flex-row justify-content-between p-3 mx-3">
-                                <span>Total</span>
-                                <span id="newTotalSpan" class="fw-bold">0</span>
-                            </div>
                             <!-- Display total price-->
+                            <div class="order">
+                                <div class="d-flex flex-row justify-content-between p-3 mx-3">
+                                    <span>Subtotal</span>
+                                    <span  id="subTotalSpan" class="fw-bold">0</span>
+                                </div>
 
-                            <div class="d-flex flex-row justify-content-end mt-4" >
-                                <div class="mx-3">
-                                    <!--<button class="btn btn-primary mx-2">Enter Shipment Details</button>-->
-                                    <form action="showCheckoutPage.php" method="post">
-                                        <input type="submit" name="checkoutShipment" class="btn btn-primary mx-2" value="Enter Shipment Details">
-                                        <input type="submit" name="checkoutCustomer" class="btn btn-primary" value="Proceed to Payment">
-                                    </form>
+                                <div class="d-flex flex-row justify-content-between p-3 mx-3">
+                                    <span>Discount</span>
+                                    <span id="differenceSpan">-0</span>
+                                </div>
+
+                                <div class="d-flex flex-row justify-content-between p-3 mx-3">
+                                    <span>Total</span>
+                                    <span id="newTotalSpan" class="fw-bold">0</span>
+                                </div>
+                                <!-- Display total price-->
+
+                                <div class="d-flex flex-row justify-content-end mt-4" >
+                                    <div class="mx-3">
+                                        <!--<button class="btn btn-primary mx-2">Enter Shipment Details</button>-->
+                                        <form action="showCheckoutPage.php" method="post">
+                                            <input type="submit" name="checkoutShipment" class="btn btn-primary mx-2" value="Enter Shipment Details">
+                                            <input type="submit" name="checkoutCustomer" class="btn btn-primary" value="Proceed to Payment">
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
 
+                        </div>
                     </div>
                 </div>
 
