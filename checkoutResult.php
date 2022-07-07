@@ -32,7 +32,9 @@ if(isset($_POST['checkoutForResult'])){
 
         $conn = getDBconnection();
         $newOrderId = GetNewOrderID($conn);
-        $orderCreateDate = date("Y/m/d");
+        //Set default_timezone for order create date
+        date_default_timezone_set('Asia/Hong_Kong');
+        $orderCreateDate = date("Y-m-d H:i:s");
         $discount = $_SESSION['discountRate'];
         $current_user = $_SESSION['User']['ID'];
 
@@ -80,7 +82,7 @@ if(isset($_POST['checkoutForResult'])){
                     <h5 class="card-title text-left">Order ID# <span><?=$newOrderId?></span></h5>
                     <p class="card-text text-center" ><i class="bi bi-check-circle-fill" style="font-size:5em;"></i>.</p>
                     <h2 class="card-text text-center">Transaction successful</h2>
-                    <p class="card-text text-center"><small class="text-muted">Order Date: <?=$orderCreateDate?></small></p>
+                    <p class="card-text text-center"><small class="text-muted mx-3">Staff ID: <?=$current_user?></small><small class="text-muted">Order Date: <?=$orderCreateDate?></small></p>
                 </div>
 
                 <!--Progress Bar-->

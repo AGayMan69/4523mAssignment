@@ -6,7 +6,7 @@ if (isset($_GET['selectDate'])){
     $targetDate = '%'.$_GET['selectDate'].'%';
 
     $query =
-        "SELECT staffID,staffName,Count(orderID) AS NoOfOrder, SUM(orderAmount) AS OrderAmount FROM staff NATURAL JOIN orders where dateTime LIKE '$targetDate' GROUP BY staffID;";
+        "SELECT staffID,staffName,Count(orderID) AS NoOfOrder, SUM(orderAmount) AS OrderAmount FROM staff NATURAL JOIN orders WHERE position='Staff' and dateTime LIKE '$targetDate' GROUP BY staffID;";
     $rs = mysqli_query($conn, $query) or die(mysqli_connect_error());
 
         //Convert to associate array
@@ -25,7 +25,7 @@ if (isset($_GET['selectDate'])){
 
     //Get the employee that NoOfOrder ==0
     $query =
-            "SELECT staffID,staffName FROM staff WHERE staffID NOT IN (SELECT staffID FROM orders WHERE dateTime LIKE '$targetDate')";
+            "SELECT staffID,staffName FROM staff WHERE position='Staff' AND staffID NOT IN (SELECT staffID FROM orders WHERE dateTime LIKE '$targetDate')";
     $rs = mysqli_query($conn, $query) or die(mysqli_connect_error());
 
     //Convert to associate array
