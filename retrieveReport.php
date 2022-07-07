@@ -1,58 +1,68 @@
 <?php
 include 'database_connection.php';
 
-$conn = getDBconnection();
+if (isset($_GET['selectDate'])){
+    $conn = getDBconnection();
+    $targetDate = '%'.$_GET['selectDate'].'%';
 
-//Mysql statement to retrieve all staff monthly report
-$query =
-    "SELECT staffID,staffName,Count(orderID) AS NoOfOrder , SUM(orderAmount) AS OrderAmount FROM staff NATURAL JOIN orders where dateTime >= DATE_FORMAT(NOW(), '%Y-%m-01') GROUP BY staffID;";
-$rs = mysqli_query($conn, $query) or die(mysqli_connect_error());
+    $query =
+        "SELECT staffID,staffName,Count(orderID) AS NoOfOrder, SUM(orderAmount) AS OrderAmount FROM staff NATURAL JOIN orders where dateTime LIKE '$targetDate' GROUP BY staffID;";
+    $rs = mysqli_query($conn, $query) or die(mysqli_connect_error());
 
-//Convert to associate array
-$reportData = array();
-while ($row = mysqli_fetch_assoc($rs)){
-    extract($row);
-        $reportData[] =
-            [
-                'staffID' => $staffID,
-                'staffName' => $staffName,
-                'NoOfOrder' => $NoOfOrder,
-                'OrderAmount' => $OrderAmount,
-            ];
-}
-mysqli_free_result($rs);
+        //Convert to associate array
+    $reportData = array();
+    while ($row = mysqli_fetch_assoc($rs)){
+        extract($row);
 
-//Get the employee that NoOfOrder ==0
-$query =
-    "SELECT staffID,staffName FROM staff WHERE staffID NOT IN (SELECT staffID FROM orders WHERE dateTime >= DATE_FORMAT(NOW(), '%Y-%m-01'));";
-$rs = mysqli_query($conn, $query) or die(mysqli_connect_error());
+        $reportData[] =[
+            'staffID' => $staffID,
+            'staffName' => $staffName,
+            'NoOfOrder' => $NoOfOrder,
+            'OrderAmount' => $OrderAmount,
+        ];
+    }
+    mysqli_free_result($rs);
 
-//Convert to associate array
-while ($row = mysqli_fetch_assoc($rs)){
-    extract($row);
-    $reportData[] =
-        [
+    //Get the employee that NoOfOrder ==0
+    $query =
+            "SELECT staffID,staffName FROM staff WHERE staffID NOT IN (SELECT staffID FROM orders WHERE dateTime LIKE '$targetDate')";
+    $rs = mysqli_query($conn, $query) or die(mysqli_connect_error());
+
+    //Convert to associate array
+    while ($row = mysqli_fetch_assoc($rs)){
+        extract($row);
+        $reportData[] = [
             'staffID' => $staffID,
             'staffName' => $staffName,
             'NoOfOrder' => 0,
             'OrderAmount' => 0,
         ];
+    }
+
+    //Sort Associative Arrays by staffID
+    $staffIDArray = array();
+    foreach ($reportData as $key => $row)
+    {
+        $staffIDArray[$key] = $row['staffID'];
+    }
+    array_multisort($staffIDArray, SORT_ASC, $reportData);
+
+    //convert to JSON
+    echo json_encode($reportData,JSON_PRETTY_PRINT);
+
+    //Close connection
+    mysqli_close($conn);
+    //Release result set
+    mysqli_free_result($rs);
 }
 
-//Sort Associative Arrays by staffID
-$staffIDArray = array();
-foreach ($reportData as $key => $row)
-{
-    $staffIDArray[$key] = $row['staffID'];
-}
-array_multisort($staffIDArray, SORT_ASC, $reportData);
 
-//convert to JSON
-echo json_encode($reportData,JSON_PRETTY_PRINT);
 
-//Close connection
-mysqli_close($conn);
-//Release result set
-mysqli_free_result($rs);
+
+
+
+
+
+
 
 
