@@ -16,8 +16,11 @@ if ($target != '') {
 $sort = 'ASC';
 if ($order == 'dateTime' || $order == 'orderAmount')
     $sort = 'DESC';
-
-$sql .= " ORDER BY $order $sort";
+if ($order == 'orderID') {
+    $sql .= "ORDER BY CAST(orderID AS int) $sort";
+} else {
+    $sql .= " ORDER BY $order $sort";
+}
 
 $result = $conn->query($sql);
 
