@@ -2,7 +2,9 @@ var dp=$("#datepicker").datepicker( {
     format: "yyyy-mm",
     startView: "months",
     minViewMode: "months",
-    defaultDate: new Date()
+    defaultDate: new Date(),
+    startDate: '-100y',
+    endDate: '+100y'
 });
 dp.on("changeDate", function(e) {
     //Call ajax when date change
@@ -49,9 +51,10 @@ function getStaffCard(result){
     var staffName = result.staffName;
     var NoOfOrder = result.NoOfOrder;
     var OrderAmount = result.OrderAmount;
+    var id = parseInt(staffID.substring(1));
 
     //console.log((NoOfOrder/100)*100);
-    $htmlString = '<div class="staff-card row my-5 shadow-lg p-5 bg-dark text-light rounded-5"><div class="col-md-6"><div class="row justify-content-md-start justify-content-center" style="padding: 0; margin: 0"><img src="https://randomuser.me/api/portraits/men/'+Math.floor(Math.random() * 10)+'.jpg" class="rounded-circle col-12 mb-4 shadow" alt="" style="max-width: 12em; padding: 0">\n' +
+    $htmlString = '<div class="staff-card row my-5 shadow-lg p-5 bg-dark text-light rounded-5"><div class="col-md-6"><div class="row justify-content-md-start justify-content-center" style="padding: 0; margin: 0"><img src="https://randomuser.me/api/portraits/men/'+id+'.jpg" class="rounded-circle col-12 mb-4 shadow" alt="" style="max-width: 12em; padding: 0">\n' +
         '<div class="col-12 display-5 text-nowrap mb-2 text-md-start text-center" style="padding: 0">'+staffName+'</div><div class="col-12 fs-5 fw-light text-nowrap text-md-start text-center" style="padding: 0">Staff ID: '+staffID+'</div></div></div><div class="col"><div class="row mt-4 mb-5"><div class="col-12" style="padding: 0"><div class="row">\n' +
         '<div class="col-auto fs-5 fw-light" style="padding: 0">Number Of Orders: </div><div class="col-auto ms-auto fs-5 text-warning fw-semibold" style="padding: 0">'+NoOfOrder+'</div><div class="w-100"></div>\n' +
         '<div class="progress mt-3" style="max-width: 100%; padding: 0">\n' +

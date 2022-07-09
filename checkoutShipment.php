@@ -84,7 +84,7 @@ session_start();
                         <!--Delivery Date-->
                         <div class="mb-3 col-md-6">
                             <label><span>Delivery Date</span></label>
-                            <input type="date" name="deliverydate"  class="form-control" required>
+                                <input type="date" name="deliverydate" min="<?=date('Y-m-d', strtotime("+1 week"))?>" class="form-control" required>
                             <div class="invalid-feedback">
                                 Please select a valid date
                             </div>

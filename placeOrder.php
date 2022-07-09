@@ -7,13 +7,12 @@
 session_start();
 if (!isset($_SESSION['User']) ) {
     header("Location: index.php");
-//    echo "Heading to index";
 }else if ($_SESSION['User']['Position'] != "Staff") {
     header("Location: salesReport.php");
-//    echo "Heading salesReport";
 }
 
 include "database_connection.php";
+include "checkSessionTimeout.php";
 
 
 ?>
@@ -61,7 +60,7 @@ include "nav.php"?>
 
                             <!--CARD-->
                             <div class="col-lg-4 col-md-6 col-sm-12 d-flex align-self-stretch py-2">
-                                <div class="card shadow-sm mb-4">
+                                <div class="card shadow-sm mb-4 col-12">
                                     <!--Product Image-->
                                     <img src="images/products/No-Image-Placeholder.svg" class="card-img-top pt-2" alt="">
                                     <div class="card-body d-flex flex-column">
@@ -134,15 +133,13 @@ include "nav.php"?>
                                             </td>
 
                                             <td>
-                                                <input type="hidden"  name="itemID" value="<?=$itemID?>">
-                                                <input type="number" class="itemqty" name="buyqty" min="1" max="<?=$stockQuantity?>" value="<?=$qty?>"  onchange="updateQuantity(<?=$itemID?>,this)">
+                                                <input type="number" class="itemqty" name="buyqty" min="1" max="<?=$stockQuantity?>" value="<?=$qty?>"  onchange="updateQuantity(<?=$itemID?>, <?=$price?>, this)">
                                             </td>
 
                                             <td>$<?=$price?>
-                                                <input type="hidden" class="itemprice" value="<?=$price?>">
                                             </td>
 
-                                            <td class="itemamount">
+                                            <td id="row-<?=$itemID?>-amount" class="itemamount">
                                                $<?=$price*$qty?>
                                             </td>
 

@@ -10,6 +10,7 @@ $orderInfo = $conn->query($sql);
 
 $sql = "SELECT * FROM itemorders io NATURAL JOIN item i";
 $sql .= " WHERE io.orderID = $targetID";
+$sql .= " ORDER BY itemName DESC";
 $orderItemList = $conn->query($sql);
 
 

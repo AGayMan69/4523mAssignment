@@ -6,6 +6,7 @@ if (!isset($_SESSION['User']) ) {
 if ($_SESSION['User']['Position'] != "Manager") {
     header("Location: placeOrder.php");
 }
+include "checkSessionTimeout.php";
 ?>
     <!doctype html>
 <html lang="en">

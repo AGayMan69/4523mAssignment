@@ -1,5 +1,6 @@
 <?php
 include 'database_connection.php';
+include 'timeout.php';
 
 if (isset($_POST['staffID']) && isset($_POST['password'])) {
     extract($_POST);
@@ -21,10 +22,13 @@ if (isset($_POST['staffID']) && isset($_POST['password'])) {
             if (strcmp($password, $user_password) == 0) {
                 echo "Login successfully";
                 // Creating Session
+                session_set_cookie_params(getSessionTimeout());
                 session_start();
                 $_SESSION['User']['ID'] = $user_staffID;
                 $_SESSION['User']['Name'] = $user_staffName;
                 $_SESSION['User']['Position'] = $user_position;
+                $_SESSION['LAST_ACTIVITY'] = time();
+
                 if ($_SESSION['User']['Position'] == "Staff") {
                     header("Location: placeOrder.php");
                 } else {

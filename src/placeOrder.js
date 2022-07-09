@@ -1,4 +1,4 @@
-async function updateQuantity(id, input) {
+async function updateQuantity(id, price, input) {
     var data = {
         product: id,
         qty: input.value
@@ -12,7 +12,8 @@ async function updateQuantity(id, input) {
     })
 
     const output = await res.json();
-    // console.log(output);
+    const itemAmount = document.querySelector(`#row-${id}-amount`);
+    itemAmount.innerHTML = "$" + (input.value * price);
 }
 
 async function addtoCart(addBtn) {
@@ -44,16 +45,14 @@ async function addtoCart(addBtn) {
     </td>
     
     <td>
-        <input type="hidden" name="itemID" value="${data['itemID']}">
             <input type="number" class="itemqty" name="qty" min="1" max="${data['stockQuantity']}" value="${data['qty']}"
-            onchange="updateQuantity(${data['itemID']},this)">
+            onchange="updateQuantity(${data['itemID']}, ${data['price']}, this)">
     </td>
 
     <td>$${data['price']}
-        <input type="hidden" class="itemprice" value="${data['price']}">
     </td>
 
-    <td class="itemamount">
+    <td id="row-${data['itemID']}-amount" class="itemamount">
            $${data['qty'] * data['price']}
     </td>
 

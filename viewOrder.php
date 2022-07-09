@@ -6,6 +6,7 @@ header("Location: index.php");
 if ($_SESSION['User']['Position'] != "Staff") {
 header("Location: salesReport.php");
 }
+include 'checkSessionTimeout.php';
 ?>
 
 <!doctype html>
